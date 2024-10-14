@@ -1,0 +1,34 @@
+npm install react-native
+
+//for client
+npm install react-native-cli
+
+// navigation
+npm install @react-navigation/native
+npm install @react-navigation/native-stack
+
+// expo
+npm install expo
+npm install -g expo-cli
+
+npm install firebase
+
+npm install expo-auth-session expo-random
+npm install expo-web-browser
+
+// for building on android
+npm install expo-updates
+
+
+
+en caso de que tengan error en URL.protocol o en 'main':
+
+Para URL.protocol:
+
+npm install --save react-native-url-polyfill
+
+Para "main":
+
+"import { registerRootComponent } from 'expo';
+
+registerRootComponent(App); //Esto va en App.js "

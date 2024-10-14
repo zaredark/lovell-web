@@ -1,0 +1,14 @@
+        <TouchableOpacity 
+          style={
+            {
+              backgroundColor: '#cfcfcf', 
+              width: 100, 
+              height: 30, 
+              marginVertical: 40, 
+              marginHorizontal: 200
+            }
+          }
+          onPress={addStand}
+        >
+          <Text>Crear Stand</Text>
+        </TouchableOpacity>

@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "App-Lovell",
+    "slug": "App-Lovell",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./imgs/imgs-examples/lovell-logo-ver2.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "imgs/imgs-examples/lovell-logo-ver2.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "imgs/imgs-examples/lovell-logo-ver2.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.zaredark.AppLovell"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/Baliana.otf"]
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5810f86f-20e6-4453-aba5-5d4d8312b1ad"
+      }
+    }
+  }
+}

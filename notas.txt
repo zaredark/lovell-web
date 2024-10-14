@@ -1,0 +1,13 @@
+------------- PRINCIPALES --------------
+
+1. Inicio
+2. Perfil
+3. Notis
+4. Editar historias
+5. Edicion imgs, videos, etc
+6. Biblioteca
+
+
+------------- SECUNDARIOS --------------
+
+7. Iniciar Sesion registro
