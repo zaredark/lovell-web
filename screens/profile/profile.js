@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-
+import axios from 'axios';
 import { 
   View, 
   Text, 
@@ -11,6 +11,7 @@ import {
   Image, 
   ScrollView,
   TextInput,
+  ActivityIndicator
 } from 'react-native';
 
 import { NavBar } from '../components/navbar/navbar';
@@ -19,6 +20,49 @@ import { useGoBackPreviousScreen } from '../components/goBack/goBack';
 
 const Profile = () => {
     const { goBackPreviousScreen } = useGoBackPreviousScreen();
+
+    const [usuarios, setUsuarios] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    const fetchUsuarios = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:5000/users');
+            setUsuarios(response.data);
+        } catch (err) {
+            setError(err.message);
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            await Promise.all([fetchUsuarios()]);
+            setLoading(false);
+        };
+
+        fetchData();
+    }, []);
+
+    if (loading) {
+        return (
+            <View>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+        );
+    }
+
+    if (error) {
+        return (
+            <View>
+                <Text>Error: {error}</Text>
+            </View>
+        );
+    }
+
+    // Evaluar si hay al menos un usuario antes de intentar acceder a él
+    const usuario = usuarios.length > 0 ? usuarios[0] : {};
+
 
     return (
         <View style={styles.container}>
@@ -38,8 +82,8 @@ const Profile = () => {
                         style={styles.pfp}
                     />
                     <View style={{flexDirection: 'column'}}>
-                        <Text style={styles.username}>ZareDark</Text>
-                        <Text style={styles.nickname}>@ZareDark</Text>
+                        <Text style={styles.username}>{usuario.nickname}</Text>
+                        <Text style={styles.nickname}>@{usuario.username}</Text>
                     </View>
                 </View>
 

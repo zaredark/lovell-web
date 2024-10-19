@@ -33,7 +33,7 @@ const Regis = ({ router }) => {
         .then(userCredentials => {
             const user = userCredentials.user;
             console.log('Logged in with:', user.email);
-            router.push("./index", { relativeToDirectory: true })
+            navigation.navigate("Pantalla Principal");
         })
         .catch(error => alert(error.message))
     }

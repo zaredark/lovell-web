@@ -25,6 +25,7 @@ import Profile from "./screens/profile/profile";
 import Notifications from "./screens/notifications/notifications";
 import DetailsBook from "./screens/detailsBook/detailsBook";
 import Regis from "./screens/regis/regis";
+import NotFoundScreen from "./screens/errorReplace";
 
 import { DisableContent } from "./screens/components-for-screens/disableScreenContent/disableScreenContent";
 //
@@ -34,6 +35,7 @@ const Stack = createNativeStackNavigator()
 function Mystack() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="Iniciar Sesion | Lovell" component={Login} options={{ headerShown: false, animationEnabled: false}}/>
       <Stack.Screen name="Pantalla Principal" component={Main} options={{ headerShown: false, animationEnabled: false}}/>
       <Stack.Screen name="Biblioteca" component={biblioteca} options={{ headerShown: false, animationEnabled: false}}/>
       <Stack.Screen name="Crea una historia" component={Create} options={{ headerShown: false, animationEnabled: false}}/>
@@ -43,9 +45,9 @@ function Mystack() {
       <Stack.Screen name="Perfil" component={Profile} options={{ headerShown: false, animationEnabled: false}}/>
       <Stack.Screen name="Notificaciones" component={Notifications} options={{ headerShown: false, animationEnabled: false}}/>
       <Stack.Screen name="Detalles" component={DetailsBook} options={{ headerShown: false, animationEnabled: false}}/>
-      <Stack.Screen name="Iniciar Sesion | Lovell" component={Login} options={{ headerShown: false, animationEnabled: false}}/>
       <Stack.Screen name="Registro" component={Regis} options={{ headerShown: false, animationEnabled: false}}/>
       <Stack.Screen name="Leer" component={Read} options={{ headerShown: false, animationEnabled: false}}/>
+      <Stack.Screen name="*" component={NotFoundScreen} options={{ headerShown: false, animationEnabled: false}}/>
     </Stack.Navigator>
   )
 }

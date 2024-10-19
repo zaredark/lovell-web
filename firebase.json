@@ -4,7 +4,6 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "site": "lovell",
     "public": "public",
     "ignore": [
       "firebase.json",
@@ -14,7 +13,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.html"
+        "destination": "index.html"
       }
     ]
   },

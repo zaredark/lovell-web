@@ -17,7 +17,7 @@ import { useAuth, AuthProvider } from './../components/firebase/controllers/auth
 import { auth} from './../components/firebase/firebase'
 import { styles } from './../components/styles/styles';
 
-const Login = ({ router }) => {
+const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -32,7 +32,7 @@ const Login = ({ router }) => {
         .then(userCredentials => {
             const user = userCredentials.user;
             console.log('Logged in with:', user.email);
-            router.push("./index", { relativeToDirectory: true })
+            navigation.navigate("Pantalla Principal");
         })
         .catch(error => alert(error.message))
     }

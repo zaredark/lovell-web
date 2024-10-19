@@ -26,11 +26,11 @@ const Main = ({navigation}) => {
     <View style={styles.container}>
       <View style={{borderBottomColor: "#dfdfdf", borderBottomWidth: 1, marginTop: '-2%'}}>
         <TouchableOpacity onPress={() => navigation.navigate('Pantalla Principal')}>
-          <Image style={styles.logo} source={ require('./../components/imgs/imgs-examples/lovell-logo-ver2.png')}/>
+          <Image style={styles.logo} source={ require('../components/imgs/imgs-examples/lovell-logo-ver2.png')}/>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.searchBar}>
-          <Text>🔎 Buscar historias, usuarios</Text>
-        </TouchableOpacity>
+        <TextInput style={styles.searchBar}
+          placeholder="🔎 Buscar historias, usuarios"
+        />
         <View style={{flexDirection: 'row', marginTop: '-5%', marginLeft: '80%', marginVertical: 30}}>
           <TouchableOpacity style={{marginLeft: '5%'}} onPress={() => navigation.navigate('Crea una historia')}>
             <Text style={{fontSize: 23, textAlign: 'center', backgroundColor: '#41f0b5', width: 80, borderRadius: 5}}>Crear</Text>
@@ -38,7 +38,7 @@ const Main = ({navigation}) => {
 
           <TouchableOpacity style={{marginLeft: '5%', marginTop: '-0.7%'}} onPress={() => navigation.navigate('Biblioteca')}>
             <Image
-              source={ require('./../components/imgs/nav-bar-icons/library.png')} 
+              source={ require('../components/imgs/nav-bar-icons/library.png')} 
               style={{
                 width: 40,
                 height: 40,
@@ -48,7 +48,7 @@ const Main = ({navigation}) => {
 
           <TouchableOpacity style={{marginLeft: '5%', marginTop: '-0.7%'}} onPress={() => navigation.navigate('Notificaciones')}>
             <Image 
-              source={ require('./../components/imgs/imgs-examples/notifications-icon.png')}
+              source={ require('../components/imgs/imgs-examples/notifications-icon.png')}
               style={{
                 width: 40,
                 height: 40,
@@ -59,7 +59,7 @@ const Main = ({navigation}) => {
 
           <TouchableOpacity style={{marginLeft: '5%', marginTop: '-0.7%'}} onPress={() => navigation.navigate('Perfil')}>
             <Image 
-              source={ require('./../components/imgs/imgs-examples/profile.png')}
+              source={ require('../components/imgs/imgs-examples/profile.png')}
               style={{
                 width: 40,
                 height: 40,
@@ -84,13 +84,13 @@ const Main = ({navigation}) => {
               <View style={{flexDirection: 'column', alignItems: 'left'}}>
                 <View style={{flexDirection: 'row'}}>
                   <TouchableOpacity onPress={() => navigation.navigate('Leer')}>
-                    <Image style={styles.bookPhoto} source={ require('./../components/imgs/imgs-examples/banner.jpg') } />
+                    <Image style={styles.bookPhoto} source={ require('../components/imgs/imgs-examples/banner.jpg') } />
                   </TouchableOpacity>
 
-                  <Image style={styles.bookPhoto} source={ require('./../components/imgs/fnaf.png') } />
-                  <Image style={styles.bookPhoto} source={ require('./../components/imgs/bnha.png') } />
-                  <Image style={styles.bookPhoto} source={ require('./../components/imgs/xokasLibro.png') } />
-                  <Image style={styles.bookPhoto} source={ require('./../components/imgs/xokas2.jpg') } />
+                  <Image style={styles.bookPhoto} source={ require('../components/imgs/fnaf.png') } />
+                  <Image style={styles.bookPhoto} source={ require('../components/imgs/bnha.png') } />
+                  <Image style={styles.bookPhoto} source={ require('../components/imgs/xokasLibro.png') } />
+                  <Image style={styles.bookPhoto} source={ require('../components/imgs/xokas2.jpg') } />
                 </View>
 
                 <View>
@@ -108,17 +108,17 @@ const Main = ({navigation}) => {
               style={{flexDirection: 'row'}}
             >
               <TouchableOpacity onPress={() => navigation.navigate('Detalles')}>
-                <Image style={styles.bookPhoto} source={ require('./../components/imgs/imgs-examples/banner.jpg') } />
+                <Image style={styles.bookPhoto} source={ require('../components/imgs/imgs-examples/banner.jpg') } />
               </TouchableOpacity>
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/bnha.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/fnaf.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/unicorniovolador.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/bnha.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/fnaf.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/unicorniovolador.png') } />
             </ScrollView>
 
             <View>
                 <Text style={styles.titleBook}>Titulo 1 - Titulo de Prueba</Text>
                 <View style={{flexDirection: 'row'}}>
-                  <Image style={styles.iconCaps} source={ require('./../components/imgs/caps.png') } />
+                  <Image style={styles.iconCaps} source={ require('../components/imgs/caps.png') } />
                   <Text style={{marginHorizontal: 1}}>11 partes</Text>
                   <Text style={styles.status}>Completo</Text>
                 </View>
@@ -139,16 +139,16 @@ const Main = ({navigation}) => {
               showsHorizontalScrollIndicator={false} 
               style={{flexDirection: 'row'}}
             >
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/xokasLibro.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/bnha.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/fnaf.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/unicorniovolador.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/xokasLibro.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/bnha.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/fnaf.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/unicorniovolador.png') } />
             </ScrollView>
 
             <View>
                 <Text style={styles.titleBook}>Titulo 1 - Titulo de Prueba</Text>
                 <View style={{flexDirection: 'row'}}>
-                  <Image style={styles.iconCaps} source={ require('./../components/imgs/caps.png') } />
+                  <Image style={styles.iconCaps} source={ require('../components/imgs/caps.png') } />
                   <Text style={{marginHorizontal: 1}}>11 partes</Text>
                   <Text style={styles.status}>Completo</Text>
                 </View>
@@ -168,16 +168,16 @@ const Main = ({navigation}) => {
               showsHorizontalScrollIndicator={false} 
               style={{flexDirection: 'row'}}
             >
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/xokasLibro.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/bnha.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/fnaf.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/unicorniovolador.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/xokasLibro.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/bnha.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/fnaf.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/unicorniovolador.png') } />
             </ScrollView>
 
             <View>
                 <Text style={styles.titleBook}>Titulo 1 - Titulo de Prueba</Text>
                 <View style={{flexDirection: 'row'}}>
-                  <Image style={styles.iconCaps} source={ require('./../components/imgs/caps.png') } />
+                  <Image style={styles.iconCaps} source={ require('../components/imgs/caps.png') } />
                   <Text style={{marginHorizontal: 1}}>11 partes</Text>
                   <Text style={styles.status}>Completo</Text>
                 </View>
@@ -197,16 +197,16 @@ const Main = ({navigation}) => {
               showsHorizontalScrollIndicator={false} 
               style={{flexDirection: 'row'}}
             >
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/xokasLibro.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/bnha.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/fnaf.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/unicorniovolador.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/xokasLibro.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/bnha.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/fnaf.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/unicorniovolador.png') } />
             </ScrollView>
 
             <View>
                 <Text style={styles.titleBook}>Titulo 1 - Titulo de Prueba</Text>
                 <View style={{flexDirection: 'row'}}>
-                  <Image style={styles.iconCaps} source={ require('./../components/imgs/caps.png') } />
+                  <Image style={styles.iconCaps} source={ require('../components/imgs/caps.png') } />
                   <Text style={{marginHorizontal: 1}}>11 partes</Text>
                   <Text style={styles.status}>Completo</Text>
                 </View>
@@ -226,16 +226,16 @@ const Main = ({navigation}) => {
               showsHorizontalScrollIndicator={false} 
               style={{flexDirection: 'row'}}
             >
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/xokasLibro.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/bnha.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/fnaf.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/unicorniovolador.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/xokasLibro.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/bnha.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/fnaf.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/unicorniovolador.png') } />
             </ScrollView>
 
             <View>
                 <Text style={styles.titleBook}>Titulo 1 - Titulo de Prueba</Text>
                 <View style={{flexDirection: 'row'}}>
-                  <Image style={styles.iconCaps} source={ require('./../components/imgs/caps.png') } />
+                  <Image style={styles.iconCaps} source={ require('../components/imgs/caps.png') } />
                   <Text style={{marginHorizontal: 1}}>11 partes</Text>
                   <Text style={styles.status}>Completo</Text>
                 </View>
@@ -255,16 +255,16 @@ const Main = ({navigation}) => {
               showsHorizontalScrollIndicator={false} 
               style={{flexDirection: 'row'}}
             >
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/xokasLibro.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/bnha.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/fnaf.png') } />
-              <Image style={styles.bookPhoto} source={ require('./../components/imgs/unicorniovolador.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/xokasLibro.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/bnha.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/fnaf.png') } />
+              <Image style={styles.bookPhoto} source={ require('../components/imgs/unicorniovolador.png') } />
             </ScrollView>
 
             <View>
                 <Text style={styles.titleBook}>Titulo 1 - Titulo de Prueba</Text>
                 <View style={{flexDirection: 'row'}}>
-                  <Image style={styles.iconCaps} source={ require('./../components/imgs/caps.png') } />
+                  <Image style={styles.iconCaps} source={ require('../components/imgs/caps.png') } />
                   <Text style={{marginHorizontal: 1}}>11 partes</Text>
                   <Text style={styles.status}>Completo</Text>
                 </View>
