@@ -28,7 +28,7 @@ const DATA = [
   { id: '3', name: 'Capitulo 3', value: '' },
 ];
 
-const DetailsBook = ({ navigation }) => {
+const DetailsBook = ({ navigation, route }) => {
   const { goBackPreviousScreen } = useGoBackPreviousScreen();
 
   const scrollY = React.useRef(new Animated.Value(0)).current; // Usar useRef para crear la referencia de scrollY
