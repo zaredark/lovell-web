@@ -3,7 +3,7 @@ from flask_cors import CORS
 import queryMySQL as q
 
 app = Flask(__name__)
-CORS(app    )
+CORS(app)
 
 # Configuracion base de datos
 db = q.DataBaseLovellWeb(
