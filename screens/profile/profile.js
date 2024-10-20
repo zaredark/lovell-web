@@ -21,14 +21,14 @@ import { useGoBackPreviousScreen } from '../components/goBack/goBack';
 const Profile = () => {
     const { goBackPreviousScreen } = useGoBackPreviousScreen();
 
-    const [usuarios, setUsuarios] = useState(null);
+    const [usuario, setUsuario] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchUsuarios = async () => {
+    const fetchUsuario = async () => {
         try {
             const response = await axios.get("https://lovell-web.onrender.com/users");
-            setUsuarios(response.data); // Guardar usuarios en el estado
+            setUsuario(response.data); // Guardar usuarios en el estado
         } catch (err) {
             console.error("Network error:", err);
             setError("Error al obtener los datos.");
@@ -38,7 +38,7 @@ const Profile = () => {
     };
 
     useEffect(() => {
-        fetchUsuarios(); // Llamada inicial para obtener los datos
+        fetchUsuario(); // Llamada inicial para obtener los datos
     }, []);
 
     if (loading) {
@@ -52,14 +52,21 @@ const Profile = () => {
     if (error) {
         return (
             <View style={styles.errorContainer}>
+                <TouchableOpacity onPress={goBackPreviousScreen} style={{marginTop: 30}}>
+                    <Image source={ require('./../components/imgs/imgs-examples/backButton.png')} style={{width: 30, height: 30, marginLeft: 10, marginVertical: 5}} />
+                </TouchableOpacity>
                 <Text style={styles.errorText}>{error}</Text>
             </View>
         );
     }
 
-    // Evaluar si hay al menos un usuario antes de intentar acceder a él
-    const usuario = usuarios.length > 0 ? usuarios[0] : {};
-
+    if (!usuario) {
+        return (
+            <View style={styles.errorContainer}>
+                <Text style={styles.errorText}>No se encontró el usuario.</Text>
+            </View>
+        );
+    }
 
     return (
         <View style={styles.container}>

@@ -47,18 +47,36 @@ class DataBaseLovellWeb:
     # Método para obtener un usuario
     def get_user(self):
         self.connect()
-        query = 'SELECT username, nickname, bio FROM usuarios LIMIT 1;'  # Limitar a un solo usuario
+        query = 'SELECT username, nickname, bio FROM usuarios LIMIT 1;'
         self.cursor.execute(query)
         
-        result = self.cursor.fetchone()  # Obtener un único resultado
+        result = self.cursor.fetchone()
+        user = result if result else None  # Validar directamente si hay resultado
+    
+        self.disconnect()
+        return user  # Retornar el usuario completo como diccionario
+    
+    # consulta para la busqueda de libros
+    def get_search(self, value):
+        self.connect()
+        query = f'''
+            SELECT 
+                titulo,
+                sipnosis,
+                cant_capitulos,
+                maduro,
+                completo,
+                portada
+            FROM
+                libros
+            WHERE
+                titulo LIKE "%{value}%" or
+                categorias LIKE "%{value}%" or
+                etiquetas LIKE "%{value}%"
+        '''
         
-        user = None  # Inicializar user
-        if result:  # Verificar si hay resultados
-            user = {
-                'username': result['username'],
-                'nickname': result['nickname'],
-                'bio': result['bio']
-            }
-        
-        self.disconnect()  # Desconectar al final
-        return user  # Devolver el usuario o None
+        self.cursor.execute(query)
+
+        result = self.cursor.fetchall()
+        self.disconnect()
+        return result

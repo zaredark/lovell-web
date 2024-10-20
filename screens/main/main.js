@@ -17,11 +17,37 @@ import {
 import { styles } from './../components/styles/styles';
 
 const Main = ({navigation}) => {
-  const [isMenuVisible, setMenuVisible] = useState(false);
+  //const [isMenuVisible, setMenuVisible] = useState(false);
+  //const toggleMenu = () => setMenuVisible(!isMenuVisible);
 
-  const toggleMenu = () => setMenuVisible(!isMenuVisible);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const searchBooks = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ search: searchTerm }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setBooks(data); // Actualiza el estado con los resultados
+      } else {
+        console.error('Error:', data.error);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
   
-
+  const handleSearch = ( )=> {
+    searchBooks()
+    navigation.navigate('Buscar')
+  }
+ 
   return (      
     <View style={styles.container}>
       <View style={{borderBottomColor: "#dfdfdf", borderBottomWidth: 1, marginTop: '-2%'}}>
@@ -29,7 +55,10 @@ const Main = ({navigation}) => {
           <Image style={styles.logo} source={ require('../components/imgs/imgs-examples/lovell-logo-ver2.png')}/>
         </TouchableOpacity>
         <TextInput style={styles.searchBar}
-          placeholder="🔎 Buscar historias, usuarios"
+          placeholder="Buscar historias, usuarios"
+          value={searchTerm}
+          onChangeText={setSearchTerm}
+          onSubmitEditing={handleSearch}
         />
         <View style={{flexDirection: 'row', marginTop: '-5%', marginLeft: '80%', marginVertical: 30}}>
           <TouchableOpacity style={{marginLeft: '5%'}} onPress={() => navigation.navigate('Crea una historia')}>
