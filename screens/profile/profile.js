@@ -27,7 +27,7 @@ const Profile = () => {
 
     const fetchUsuarios = async () => {
         try {
-            const response = await axios.get("http://35.160.120.126/users");
+            const response = await axios.get("https://lovell-web.onrender.com/users");
             setUsuarios(response.data); // Guardar usuarios en el estado
         } catch (err) {
             console.error("Network error:", err);
