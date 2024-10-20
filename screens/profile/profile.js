@@ -52,6 +52,9 @@ const Profile = () => {
     if (error) {
         return (
             <View style={styles.errorContainer}>
+                <TouchableOpacity onPress={goBackPreviousScreen} style={{marginTop: 30}}>
+                    <Image source={ require('./../components/imgs/imgs-examples/backButton.png')} style={{width: 30, height: 30, marginLeft: 10, marginVertical: 5}} />
+                </TouchableOpacity>
                 <Text style={styles.errorText}>{error}</Text>
             </View>
         );
