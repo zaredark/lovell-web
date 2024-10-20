@@ -45,7 +45,7 @@ const Main = ({navigation}) => {
   
   const handleSearch = ( )=> {
     searchBooks()
-    navigation.navigate('Buscar')
+    navigation.navigate('Buscar', { term: searchTerm })
   }
  
   return (      

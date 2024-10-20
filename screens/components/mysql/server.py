@@ -14,6 +14,8 @@ db = q.DataBaseLovellWeb(
     port=23336
 )
 
+# ,---------------- GET ------------------,
+
 @app.route('/users', methods=['GET'])
 def getUser():
     try:
@@ -24,6 +26,8 @@ def getUser():
             return jsonify({'error': 'No user found'}), 404  # No se encontraron usuarios
     except Exception as e:
         return jsonify({'error': str(e)}), 500  # Manejo de errores
+
+# ,---------------- POST -----------------,
 
 @app.route('/search', methods=['POST'])
 def search_books():

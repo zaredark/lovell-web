@@ -7,66 +7,66 @@ import {
   FlatList, 
   TouchableOpacity, 
   Image, 
-  ScrollView,
+  TextInput, 
 } from 'react-native';
 
 import { styles } from '../components/styles/styles';
 import { useGoBackPreviousScreen } from '../components/goBack/goBack';
 
-const Search = ({ navigation }) => {
+const Search = ({ navigation, route }) => {
   const { goBackPreviousScreen } = useGoBackPreviousScreen();
+  const { term } = route.params; // Recibe el término de búsqueda
 
-  // Estado para almacenar los resultados de la búsqueda
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState([]); // Estado para los resultados de búsqueda
+  const [searchTerm, setSearchTerm] = useState(term || ''); // Estado del término de búsqueda
 
-  // Función para obtener los libros desde la API
-  const fetchBooks = async () => {
+  useEffect(() => {
+    fetchResults();
+  }, []);
+
+  const fetchResults = async () => {
     try {
       const response = await fetch('https://lovell-web.onrender.com/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ search: response.data }) // Ajusta según lo que busques
+        body: JSON.stringify({ search: searchTerm }),
       });
 
       const data = await response.json();
-      setBooks(data);
+      if (response.ok) {
+        setBooks(data); // Actualiza el estado con los libros encontrados
+      } else {
+        console.error('Error:', data.error);
+      }
     } catch (error) {
-      console.error('Error fetching books:', error);
+      console.error('Error:', error);
     }
   };
 
-  // Cargar los libros al iniciar el componente
-  useEffect(() => {
-    fetchBooks();
-  }, []);
-
-  // Renderiza cada libro en la lista
   const renderBookItem = ({ item }) => (
     <TouchableOpacity 
       style={styles.standBooks} 
-      onPress={() => navigation.navigate('Detalles')}
+      onPress={() => navigation.navigate('Detalles', { book: item })}
     >
       <View style={{ flexDirection: 'row' }}>
         <Image 
           style={styles.bookPhoto} 
-          source={{ uri: item.portada }} // Enlace dinámico desde la API
+          source={{ uri: item.portada }} 
           resizeMode="cover" 
         />
-        <View style={{ flexDirection: 'column' }}>
-          <Text style={[styles.titleBook, { marginLeft: '1%' }]}>
-            {item.titulo}
-          </Text>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        <View style={{ flexDirection: 'column', marginLeft: 10 }}>
+          <Text style={styles.titleBook}>{item.titulo}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
             <Image 
               style={styles.iconCaps} 
               source={require('./../components/imgs/caps.png')} 
             />
-            <Text style={{ marginHorizontal: 1 }}>{item.cant_capitulos} partes</Text>
+            <Text style={{ marginHorizontal: 5 }}>{item.cant_capitulos} partes</Text>
             <Text style={styles.status}>
               {item.completo ? 'Completo' : 'En progreso'}
             </Text>
           </View>
-          <Text style={{ marginLeft: '1%', width: '25%', flexWrap: 'wrap' }}>
+          <Text style={{ marginTop: 5, width: '75%' }}>
             {item.sipnosis.substring(0, 100)}...
           </Text>
         </View>
@@ -76,22 +76,23 @@ const Search = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: 'row', marginVertical: 40 }}>
+      <View style={{ flexDirection: 'row', marginVertical: 40, alignItems: 'center' }}>
         <TouchableOpacity onPress={goBackPreviousScreen}>
           <Image 
             source={require('./../components/imgs/imgs-examples/backButton.png')} 
             style={{ width: 30, height: 30, marginHorizontal: 20 }} 
           />
         </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.searchBar} 
-          onPress={() => navigation.navigate('Buscar')}
-        >
-          <Text>🔎 Buscar historias, usuarios</Text>
-        </TouchableOpacity>
+        <TextInput
+          placeholder='🔎 Buscar historias, usuarios'
+          value={searchTerm}
+          onChangeText={setSearchTerm}
+          style={{ flex: 1, borderBottomWidth: 1, marginRight: 10 }}
+          onSubmitEditing={fetchResults} // Actualiza los resultados al presionar enter
+        />
       </View>
 
-      <Text style={[styles.category, { marginTop: '10%' }]}>Resultados</Text>
+      <Text style={[styles.category, { marginTop: 10 }]}>Resultados</Text>
 
       <FlatList 
         data={books}
