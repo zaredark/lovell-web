@@ -14,34 +14,55 @@ import { styles } from '../components/styles/styles';
 import { useGoBackPreviousScreen } from '../components/goBack/goBack';
 
 const Search = ({ navigation, route }) => {
-  const { goBackPreviousScreen } = useGoBackPreviousScreen();
-  const { term } = route.params; // Recibe el término de búsqueda
+    const { goBackPreviousScreen } = useGoBackPreviousScreen();
+    const { term } = route.params; // Recibe el término de búsqueda
 
-  const [books, setBooks] = useState([]); // Estado para los resultados de búsqueda
-  const [searchTerm, setSearchTerm] = useState(term || ''); // Estado del término de búsqueda
+    const [books, setBooks] = useState([]); // Estado para los resultados de búsqueda
+    const [searchTerm, setSearchTerm] = useState(term || ''); // Estado del término de búsqueda
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchResults();
-  }, []);
 
-  const fetchResults = async () => {
-    try {
-      const response = await fetch('https://lovell-web.onrender.com/search', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ search: searchTerm }),
-      });
+    useEffect(() => {
+      fetchResults();
+    }, []);
 
-      const data = await response.json();
-      if (response.ok) {
-        setBooks(data); // Actualiza el estado con los libros encontrados
-      } else {
-        console.error('Error:', data.error);
+    const fetchResults = async () => {
+      try {
+        const response = await fetch('https://lovell-web.onrender.com/search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ search: searchTerm }),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setBooks(data); // Actualiza el estado con los libros encontrados
+        } else {
+          console.error('Error:', data.error);
+        }
+      } catch (error) {
+        console.error('Error:', error);
       }
-    } catch (error) {
-      console.error('Error:', error);
+    };
+    
+    if (loading) {
+      return (
+          <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+      );
     }
-  };
+    
+    if (error) {
+        return (
+            <View style={styles.errorContainer}>
+                <TouchableOpacity onPress={goBackPreviousScreen} style={{marginTop: 30}}>
+                    <Image source={ require('./../components/imgs/imgs-examples/backButton.png')} style={{width: 30, height: 30, marginLeft: 10, marginVertical: 5}} />
+                </TouchableOpacity>
+                <Text style={styles.errorText}>{error}</Text>
+            </View>
+        );
+    }
 
   const renderBookItem = ({ item }) => (
     <TouchableOpacity 
