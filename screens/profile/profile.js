@@ -27,26 +27,26 @@ const Profile = () => {
 
     const fetchUsuarios = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:5000/users');
-            setUsuarios(response.data);
+            const response = await axios.get(
+                "https://zared4rk.pythonanywhere.com/users", 
+                { headers: { "Content-Type": "application/json" } }
+            );
+            setUsuarios(response.data); // Guardar usuarios en el estado
         } catch (err) {
-            setError(err.message);
+            console.error("Network error:", err);
+            setError("Error al obtener los datos.");
+        } finally {
+            setLoading(false); // Detener el indicador de carga
         }
     };
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            await Promise.all([fetchUsuarios()]);
-            setLoading(false);
-        };
-
-        fetchData();
+        fetchUsuarios(); // Llamada inicial para obtener los datos
     }, []);
 
     if (loading) {
         return (
-            <View>
+            <View style={styles.loadingContainer}>
                 <ActivityIndicator size="large" color="#0000ff" />
             </View>
         );
@@ -54,8 +54,8 @@ const Profile = () => {
 
     if (error) {
         return (
-            <View>
-                <Text>Error: {error}</Text>
+            <View style={styles.errorContainer}>
+                <Text style={styles.errorText}>{error}</Text>
             </View>
         );
     }
@@ -101,8 +101,9 @@ const Profile = () => {
                 <View style={styles.bio}>
                     <Text style={{fontSize: 20, fontWeight: 'bold', borderBottomColor: '#000', borderBottomWidth: 1, textAlign: 'center'}}>Biografía</Text>
                     <Text style={{marginTop: 10, marginLeft: 5, fontSize: 17}}>
-                        Mecha Mecha
-                        Todo lo que hice en esta vida para estar con ella 🗣🔥
+                        {usuario.bio}
+                        {/* Mecha Mecha
+                        Todo lo que hice en esta vida para estar con ella 🗣🔥 */}
                     </Text>
                 </View>
 
