@@ -75,14 +75,14 @@ const Profile = () => {
             </TouchableOpacity>
             <ScrollView>
                 <Image 
-                    source={ require('./../components/imgs/imgs-examples/banner.jpg')}
+                    source={{ uri: usuario.banner_user }}
                     style={{
                         width: 'auto',
                     }}
                 />
                 <View style={{flexDirection: 'column', alignSelf: 'center'}}>
                     <Image 
-                        source={ require('./../components/imgs/imgs-examples/inge1.jpg')}
+                        source={{ uri: usuario.icon_user  }}
                         style={styles.pfp}
                     />
                     <View style={{flexDirection: 'column'}}>
