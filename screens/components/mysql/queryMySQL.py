@@ -48,21 +48,17 @@ class DataBaseLovellWeb:
     def get_user(self):
         self.connect()
         query = 'SELECT username, nickname, bio FROM usuarios LIMIT 1;'  # Limitar a un solo usuario
+        self.cursor.execute(query)
+        
+        result = self.cursor.fetchone()  # Obtener un único resultado
+        
         user = None  # Inicializar user
-
-        try:
-            self.cursor.execute(query)
-            result = self.cursor.fetchone()  # Obtener un único resultado
-
-            if result:  # Verificar si hay resultados
-                user = {
-                    'username': result[0],  # Acceder por índice
-                    'nickname': result[1],
-                    'bio': result[2]
-                }
-        except Error as e:
-            print(f"Error fetching user: {e}")
-        finally:
-            self.disconnect()  # Asegúrate de desconectar en finally
-
+        if result:  # Verificar si hay resultados
+            user = {
+                'username': result['username'],
+                'nickname': result['nickname'],
+                'bio': result['bio']
+            }
+        
+        self.disconnect()  # Desconectar al final
         return user  # Devolver el usuario o None
