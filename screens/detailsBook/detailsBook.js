@@ -41,7 +41,7 @@ const DetailsBook = ({ navigation, route }) => {
   useEffect(() => {
     const fetchBookDetails = async () => {
       try {
-        const response = await fetch(`http://tu-api.com/books/${bookId}`); // Cambia esta URL a tu API real
+        const response = await fetch(`https://lovell-web.onrender.com/detailsBook`); // Cambia esta URL a tu API real
         const data = await response.json();
         setBookDetails(data);
       } catch (error) {
