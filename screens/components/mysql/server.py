@@ -18,9 +18,12 @@ db = q.DataBaseLovellWeb(
 def getUser():
     try:
         users = db.get_user()
-        return jsonify(users), 200  # Devuelve los usuarios en formato JSON
+        if users:
+            return jsonify(users), 200  # Devuelve los usuarios en formato JSON
+        else:
+            return jsonify({'error': 'No user found'}), 404  # No se encontraron usuarios
     except Exception as e:
         return jsonify({'error': str(e)}), 500  # Manejo de errores
     
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
