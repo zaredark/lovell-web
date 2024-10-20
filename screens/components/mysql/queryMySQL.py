@@ -52,10 +52,13 @@ class DataBaseLovellWeb:
         
         result = self.cursor.fetchone()  # Obtener un único resultado
         
+        user = None  # Inicializar user
         if result:  # Verificar si hay resultados
-            user = (result['username'], result['nickname'], result['bio'])
-        else:
-            user = None  # Si no hay usuario, devolver None
+            user = {
+                'username': result['username'],
+                'nickname': result['nickname'],
+                'bio': result['bio']
+            }
         
         self.disconnect()  # Desconectar al final
         return user  # Devolver el usuario o None

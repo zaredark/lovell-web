@@ -27,10 +27,7 @@ const Profile = () => {
 
     const fetchUsuarios = async () => {
         try {
-            const response = await axios.get(
-                "https://zared4rk.pythonanywhere.com/users", 
-                { headers: { "Content-Type": "application/json" } }
-            );
+            const response = await axios.get("https://lovell-web.onrender.com/users");
             setUsuarios(response.data); // Guardar usuarios en el estado
         } catch (err) {
             console.error("Network error:", err);
