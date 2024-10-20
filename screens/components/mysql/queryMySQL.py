@@ -70,12 +70,14 @@ class DataBaseLovellWeb:
             FROM
                 libros
             WHERE
-                titulo LIKE "%{value}%" or
-                categorias LIKE "%{value}%" or
-                etiquetas LIKE "%{value}%"
+                titulo LIKE %s or
+                categorias LIKE %s or
+                etiquetas LIKE %s
         '''
         
-        self.cursor.execute(query)
+        # Formateo del termino de busqueda
+        search_placeholder = f"%{value}%"
+        self.cursor.execute(query, (search_placeholder, search_placeholder, search_placeholder))
 
         result = self.cursor.fetchall()
         self.disconnect()
