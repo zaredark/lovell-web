@@ -53,6 +53,14 @@ const DetailsBook = ({ navigation, route }) => {
     return <Text>Cargando...</Text>; // Cargar un spinner o un mensaje mientras obtienes los datos
   }
 
+  const renderItem = ({ item }) => (
+    <View>
+        <TouchableOpacity style={{marginVertical: 5}} onPress={() => navigation.navigate('Leer')}>
+            <Text>{item.name}{item.value}</Text>
+        </TouchableOpacity>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
         <TouchableOpacity onPress={goBackPreviousScreen} style={{marginTop: 30}}>
@@ -105,15 +113,15 @@ const DetailsBook = ({ navigation, route }) => {
           />
             
           {/* <Image style={styles.background} source={ require('./../components/imgs/imgs-examples/banner.jpg')} blurRadius={2.6} /> */}
-          <Image style={[styles.addImageBook, {marginTop: -190, alignSelf: 'center'}]} source={{ uri: bookDetails.portada }} />
+          <Image style={[styles.addImageBook, {marginTop: -190, alignSelf: 'center'}]} source={{ uri: bookDetails.libros.portada }} />
           <View style={{flexDirection: 'column', alignItems: 'center'}}>
-            <Text style={{textAlign: 'center',fontSize: 18, fontWeight: 'bold'}}>{bookDetails.titulo}</Text>
-            <Text style={styles.status}>{bookDetails.completo ? 'Completo' : 'En proceso'}</Text>
+            <Text style={{textAlign: 'center',fontSize: 18, fontWeight: 'bold'}}>{bookDetails.libros.titulo}</Text>
+            <Text style={styles.status}>{bookDetails.libros.completo ? 'Completo' : 'En proceso'}</Text>
           </View>
           
           <TouchableOpacity style={{flexDirection: 'row', alignSelf: 'center', marginTop: 10}} onPress={() => navigation.navigate('Perfil')}>
-            <Image source={{ uri: bookDetails.icon_user}} style={{width: 43, height: 43, borderRadius: 40, alignSelf: 'center'}} />
-            <Text style={{marginTop: 5, marginLeft: 10, fontSize: 18}}>{bookDetails.username}</Text>
+            <Image source={{ uri: bookDetails.usuarios.icon_user}} style={{width: 43, height: 43, borderRadius: 40, alignSelf: 'center'}} />
+            <Text style={{marginTop: 5, marginLeft: 10, fontSize: 18}}>{bookDetails.usuarios.username}</Text>
           </TouchableOpacity>
 
           <View style={{flexDirection: 'row', alignSelf: 'center', marginTop: 10}}>
@@ -121,14 +129,14 @@ const DetailsBook = ({ navigation, route }) => {
               <Text style={styles.stat}>⭐500 Likes</Text>
               <View style={[styles.stat, {flexDirection: 'row'}]} >
                 <Image style={{width: 20, height: 20}} source={ require('./../components/imgs/caps.png')}/>
-                <Text style={{fontSize: 15}}>{bookDetails.cant_capitulos} partes</Text>
+                <Text style={{fontSize: 15}}>{bookDetails.libros.cant_capitulos} partes</Text>
               </View>
           </View>
 
           <View style={styles.form}>
             <Text style={{alignSelf: 'center', fontSize: 20, fontWeight: 'bold'}}>Sipnosis</Text>
             <Text style={{alignSelf: 'center', width: 1000, paddingLeft: 3, color: '#000', borderColor: '#000', borderWidth: 1}} multiline={true} editable={false}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-              {bookDetails.sipnosis}
+              {bookDetails.libros.sipnosis}
             </Text>
           </View>
 
