@@ -58,7 +58,7 @@ const Profile = () => {
     }
 
     // Evaluar si hay al menos un usuario antes de intentar acceder a él
-    const usuario = usuarios.length > 0 ? usuarios[0] : { nickname: '', username: '', bio: '' };
+    const usuario = usuarios.length > 0 ? usuarios[0] : {};
 
 
     return (
