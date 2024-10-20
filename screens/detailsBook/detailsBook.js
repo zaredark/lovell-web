@@ -34,23 +34,20 @@ const DetailsBook = ({ navigation, route }) => {
   const scrollY = React.useRef(new Animated.Value(0)).current; // Usar useRef para crear la referencia de scrollY
 
   const [bookDetails, setBookDetails] = useState(null);
-  
-  // Asumiendo que el ID del libro se pasa a través de las props de navegación
-  const { bookId } = route.params;
+
+  const fetchBookDetails = async () => {
+    try {
+      const response = await fetch(`https://lovell-web.onrender.com/detailsBook`);
+      const data = await response.json();
+      setBookDetails(data);
+    } catch (error) {
+      console.error("Error fetching book details:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchBookDetails = async () => {
-      try {
-        const response = await fetch(`https://lovell-web.onrender.com/detailsBook`); // Cambia esta URL a tu API real
-        const data = await response.json();
-        setBookDetails(data);
-      } catch (error) {
-        console.error("Error fetching book details:", error);
-      }
-    };
-
     fetchBookDetails();
-  }, [bookId]);
+  }, []);
 
   if (!bookDetails) {
     return <Text>Cargando...</Text>; // Cargar un spinner o un mensaje mientras obtienes los datos
