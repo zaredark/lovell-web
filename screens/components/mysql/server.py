@@ -15,14 +15,10 @@ db = q.DataBaseLovellWeb(
 )
 
 @app.route('/users', methods=['GET'])
-def get_user():
+def getUser():
     try:
-        user = db.get_user()  # Obtiene un único usuario
-        
-        if user is None:
-            return jsonify({'message': 'No user found'}), 404  # Devuelve 404 si no se encuentra un usuario
-            
-        return jsonify(user), 200  # Devuelve el usuario en formato JSON
+        users = db.get_user()
+        return jsonify(users), 200  # Devuelve los usuarios en formato JSON
     except Exception as e:
         return jsonify({'error': str(e)}), 500  # Manejo de errores
     
