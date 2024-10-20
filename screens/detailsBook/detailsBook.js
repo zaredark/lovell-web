@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-
+import axios from 'axios';
 import Checkbox from 'expo-checkbox';
 import { LinearGradient } from 'expo-linear-gradient';
 import { 
@@ -33,6 +33,29 @@ const DetailsBook = ({ navigation }) => {
 
   const scrollY = React.useRef(new Animated.Value(0)).current; // Usar useRef para crear la referencia de scrollY
 
+  const [bookDetails, setBookDetails] = useState(null);
+  
+  // Asumiendo que el ID del libro se pasa a través de las props de navegación
+  const { bookId } = route.params;
+
+  useEffect(() => {
+    const fetchBookDetails = async () => {
+      try {
+        const response = await fetch(`http://tu-api.com/books/${bookId}`); // Cambia esta URL a tu API real
+        const data = await response.json();
+        setBookDetails(data);
+      } catch (error) {
+        console.error("Error fetching book details:", error);
+      }
+    };
+
+    fetchBookDetails();
+  }, [bookId]);
+
+  if (!bookDetails) {
+    return <Text>Cargando...</Text>; // Cargar un spinner o un mensaje mientras obtienes los datos
+  }
+
   const renderItem = ({ item }) => (
     <View>
         <TouchableOpacity style={{marginVertical: 5}} onPress={() => navigation.navigate('Leer')}>
@@ -58,7 +81,7 @@ const DetailsBook = ({ navigation }) => {
           {/* Fondo que se desplaza más lento */}
           <Animated.Image
             blurRadius={2.6}
-            source={require('./../components/imgs/imgs-examples/banner.jpg')} // URL de imagen
+            source={{ uri: bookDetails.portada }} // URL de imagen
             style={[
               {
                 alignSelf: 'center',
@@ -93,15 +116,15 @@ const DetailsBook = ({ navigation }) => {
           />
             
           {/* <Image style={styles.background} source={ require('./../components/imgs/imgs-examples/banner.jpg')} blurRadius={2.6} /> */}
-          <Image style={[styles.addImageBook, {marginTop: -190, alignSelf: 'center'}]} source={ require('./../components/imgs/imgs-examples/banner.jpg')} />
+          <Image style={[styles.addImageBook, {marginTop: -190, alignSelf: 'center'}]} source={{ uri: bookDetails.portada }} />
           <View style={{flexDirection: 'column', alignItems: 'center'}}>
-            <Text style={{textAlign: 'center',fontSize: 18, fontWeight: 'bold'}}>Titulo 1 - Titulo de Prueba</Text>
-            <Text style={styles.status}>Completo</Text>
+            <Text style={{textAlign: 'center',fontSize: 18, fontWeight: 'bold'}}>{bookDetails.titulo}</Text>
+            <Text style={styles.status}>{bookDetails.completo ? 'Completo' : 'En proceso'}</Text>
           </View>
           
           <TouchableOpacity style={{flexDirection: 'row', alignSelf: 'center', marginTop: 10}} onPress={() => navigation.navigate('Perfil')}>
-            <Image source={ require('./../components/imgs/imgs-examples/inge1.jpg')} style={{width: 43, height: 43, borderRadius: 40, alignSelf: 'center'}} />
-            <Text style={{marginTop: 5, marginLeft: 10, fontSize: 18}}>ZareDark</Text>
+            <Image source={{ uri: bookDetails.icon_user}} style={{width: 43, height: 43, borderRadius: 40, alignSelf: 'center'}} />
+            <Text style={{marginTop: 5, marginLeft: 10, fontSize: 18}}>{bookDetails.username}</Text>
           </TouchableOpacity>
 
           <View style={{flexDirection: 'row', alignSelf: 'center', marginTop: 10}}>
@@ -109,23 +132,15 @@ const DetailsBook = ({ navigation }) => {
               <Text style={styles.stat}>⭐500 Likes</Text>
               <View style={[styles.stat, {flexDirection: 'row'}]} >
                 <Image style={{width: 20, height: 20}} source={ require('./../components/imgs/caps.png')}/>
-                <Text style={{fontSize: 15}}>11 partes</Text>
+                <Text style={{fontSize: 15}}>{bookDetails.cant_capitulos} partes</Text>
               </View>
           </View>
 
           <View style={styles.form}>
             <Text style={{alignSelf: 'center', fontSize: 20, fontWeight: 'bold'}}>Sipnosis</Text>
             <Text style={{alignSelf: 'center', width: 1000, paddingLeft: 3, color: '#000', borderColor: '#000', borderWidth: 1}} multiline={true} editable={false}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-            aliqua. Ut enim ad minim veniam, qui Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-            aliqua. Ut enim ad minim veniam, qui
-            aliqua. Ut enim ad minim veniam, qui Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-            aliqua. Ut enim ad minim veniam, qui
-            aliqua. Ut enim ad minim veniam, qui Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-            aliqua. Ut enim ad minim veniam, qui
-            aliqua. Ut enim ad minim veniam, qui Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-            aliqua. Ut enim ad minim veniam, qui
-            aliqua. Ut enim ad minim veniam, qui Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-            aliqua. Ut enim ad minim veniam, qui</Text>
+              {bookDetails.sipnosis}
+            </Text>
           </View>
 
           <View style={{marginTop: 10, alignItems: 'center'}}>

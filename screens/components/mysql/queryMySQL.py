@@ -82,3 +82,32 @@ class DataBaseLovellWeb:
         result = self.cursor.fetchall()
         self.disconnect()
         return result
+    
+    # Metodo para mostrar detalles del libro
+    def get_detailsBooks(self, valueTitle):
+        self.connect()
+        query = '''
+            SELECT 
+                libros.titulo,
+                usuarios.username,
+                usuarios.icon_user,
+                libros.sipnosis,
+                libros.cant_capitulos,
+                libros.maduro,
+                libros.completo,
+                libros.portada
+            FROM
+                libros
+            INNER JOIN
+                usuarios
+            ON
+                libros.autor = autor.id_user
+            WHERE
+                libros.titulo = %s
+        '''
+
+        self.cursor.execute(query, (valueTitle, ))
+
+        result = self.cursor.fetchone()
+        self.disconnect()
+        return result

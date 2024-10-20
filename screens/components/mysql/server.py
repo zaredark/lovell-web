@@ -27,6 +27,17 @@ def getUser():
     except Exception as e:
         return jsonify({'error': str(e)}), 500  # Manejo de errores
 
+@app.route('/detailsBook', methods=['GET'])
+def get_book_details():
+    title = request.args.get('titulo')  # Obtener el título desde los parámetros de la consulta
+    if not title:
+        return jsonify({"error": "No title provided"}), 400
+
+    book_details = db.get_detailsBooks(title)
+    if book_details:
+        return jsonify(book_details), 200
+    else:
+        return jsonify({"error": "Book not found"}), 404
 # ,---------------- POST -----------------,
 
 @app.route('/search', methods=['POST'])
