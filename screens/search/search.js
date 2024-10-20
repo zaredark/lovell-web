@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 import { styles } from '../components/styles/styles';
-import { useGoBackPreviousScreen } from './components-for-screens/goBack/goBack';
+import { useGoBackPreviousScreen } from '../components/goBack/goBack';
 
 const Search = ({ navigation }) => {
     const { goBackPreviousScreen } = useGoBackPreviousScreen();
@@ -22,7 +22,7 @@ const Search = ({ navigation }) => {
         <View style={styles.container}>
             <View style={{flexDirection: 'row', marginVertical: 40}}>
                 <TouchableOpacity onPress={goBackPreviousScreen}>
-                    <Image source={ require('./../imgs/imgs-examples/backButton.png')} style={{width: 30, height: 30, marginHorizontal: 20}} />
+                    <Image source={ require('./../components/imgs/imgs-examples/backButton.png')} style={{width: 30, height: 30, marginHorizontal: 20}} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.searchBar} onPress={() => navigation.navigate('Buscar')}>
                     <Text>🔎 Buscar historias, usuarios</Text>
@@ -33,11 +33,11 @@ const Search = ({ navigation }) => {
                 <Text style={[styles.category, {marginTop: '10%'}]}>Resultados</Text>
                 <TouchableOpacity style={styles.standBooks} onPress={() => navigation.navigate('Detalles')}>
                     <View style={{flexDirection: 'row'}}>
-                        <Image style={styles.bookPhoto} source={ require('./../imgs/imgs-examples/banner.jpg') } />
+                        <Image style={styles.bookPhoto} source={ require('./../components/imgs/imgs-examples/banner.jpg') } />
                         <View style={{flexDirection: 'column'}}>
                             <Text style={[styles.titleBook, {marginLeft: '1%'}]}>Titulo 1 - Titulo de Prueba</Text>
                             <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-                              <Image style={styles.iconCaps} source={ require('./../imgs/caps.png') } />
+                              <Image style={styles.iconCaps} source={ require('./../components/imgs/caps.png') } />
                               <Text style={{marginHorizontal: 1}}>11 partes</Text>
                               <Text style={styles.status}>Completo</Text>
                             </View>
