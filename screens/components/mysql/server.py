@@ -1,15 +1,17 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 import queryMySQL as q
 
 app = Flask(__name__)
+CORS(app    )
 
 # Configuracion base de datos
 db = q.DataBaseLovellWeb(
-    user='if0_37435271',
-    passw='DDLv5NkajAu3zxF',
-    host='sql210.infinityfree.com',
-    database='if0_37435271_lovell_web',
-    port=3306
+    user='avnadmin',
+    passw='AVNS_2whSj1oNfbDLKCcxN7d',
+    host='lovell-web-database-zaredark-6f70.j.aivencloud.com',
+    database='lovell-web',
+    port=23336
 )
 
 @app.route('/users', methods=['GET'])
