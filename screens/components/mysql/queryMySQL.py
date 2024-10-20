@@ -55,6 +55,7 @@ class DataBaseLovellWeb:
     
         self.disconnect()
         return user  # Retornar el usuario completo como diccionario
+<<<<<<< HEAD
     
     # consulta para la busqueda de libros
     def get_search(self, value):
@@ -80,3 +81,5 @@ class DataBaseLovellWeb:
         result = self.cursor.fetchall()
         self.disconnect()
         return result
+=======
+>>>>>>> 4acb45f85af0ad3fe276d57ec08f500d1d0dfd12
