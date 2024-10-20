@@ -12,7 +12,7 @@ import {
   TextInput,
 } from 'react-native';
 
-import { styles } from './components-for-screens/styles/styles';
+import { styles } from '../components/styles/styles';
 import { useGoBackPreviousScreen } from './components-for-screens/goBack/goBack';
 
 const Search = ({ navigation }) => {
