@@ -53,14 +53,6 @@ const DetailsBook = ({ navigation, route }) => {
     return <Text>Cargando...</Text>; // Cargar un spinner o un mensaje mientras obtienes los datos
   }
 
-  const renderItem = ({ item }) => (
-    <View>
-        <TouchableOpacity style={{marginVertical: 5}} onPress={() => navigation.navigate('Leer')}>
-            <Text>{item.name}{item.value}</Text>
-        </TouchableOpacity>
-    </View>
-  );
-
   return (
     <View style={styles.container}>
         <TouchableOpacity onPress={goBackPreviousScreen} style={{marginTop: 30}}>
