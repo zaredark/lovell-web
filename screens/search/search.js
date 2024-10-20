@@ -19,8 +19,6 @@ const Search = ({ navigation, route }) => {
 
     const [books, setBooks] = useState([]); // Estado para los resultados de búsqueda
     const [searchTerm, setSearchTerm] = useState(term || ''); // Estado del término de búsqueda
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
 
     useEffect(() => {
@@ -44,25 +42,6 @@ const Search = ({ navigation, route }) => {
         console.error('Error:', error);
       }
     };
-    
-    if (loading) {
-      return (
-          <View style={styles.loadingContainer}>
-              <ActivityIndicator size="large" color="#0000ff" />
-          </View>
-      );
-    }
-    
-    if (error) {
-        return (
-            <View style={styles.errorContainer}>
-                <TouchableOpacity onPress={goBackPreviousScreen} style={{marginTop: 30}}>
-                    <Image source={ require('./../components/imgs/imgs-examples/backButton.png')} style={{width: 30, height: 30, marginLeft: 10, marginVertical: 5}} />
-                </TouchableOpacity>
-                <Text style={styles.errorText}>{error}</Text>
-            </View>
-        );
-    }
 
   const renderBookItem = ({ item }) => (
     <TouchableOpacity 
