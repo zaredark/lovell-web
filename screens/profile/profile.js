@@ -21,7 +21,7 @@ import { useGoBackPreviousScreen } from '../components/goBack/goBack';
 const Profile = () => {
     const { goBackPreviousScreen } = useGoBackPreviousScreen();
 
-    const [usuarios, setUsuarios] = useState([]);
+    const [usuarios, setUsuarios] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
