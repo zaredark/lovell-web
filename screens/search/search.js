@@ -59,7 +59,7 @@ const Search = ({ navigation, route }) => {
             console.log('Detalles del libro:', data.data);
       
             // Navegar a la pantalla de detalles con la información del libro
-            navigation.navigate('Detalles', { book: data.data });
+            navigation.navigate('Detalles', { titulo: data.data });
           } else {
             console.error('Error:', data.error);
           }
@@ -72,7 +72,7 @@ const Search = ({ navigation, route }) => {
 
     <TouchableOpacity 
       style={styles.standBooks} 
-      onPress={handlePress(item)}
+      onPress={() => handlePress(item)}
     >
       <View style={{ flexDirection: 'row' }}>
         <Image 
