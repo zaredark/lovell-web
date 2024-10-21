@@ -46,21 +46,29 @@ const Search = ({ navigation, route }) => {
 
     const handlePress = async (item) => {
         try {
-          const { titulo } = item; // Obtener el título del libro
-  
-          // Enviar el título al backend
-          const response = await axios.post('https://tu-api.com/buscar-libro', { titulo });
-  
-          // Manejar la respuesta del servidor
-          console.log('Respuesta del servidor:', response.data);
-  
-          // Navegar a la pantalla de detalles
-          navigation.navigate('Detalles', { book: item });
+          const { titulo } = item; // Extrae el título del libro
+      
+          // Realiza la solicitud GET con el título como parámetro de consulta
+          const response = await axios.get(`https://lovell-web.onrender.com/detailsBook`, {
+            params: { titulo },
+          });
+      
+          const data = response.data;
+          
+          if (data.success) {
+            console.log('Detalles del libro:', data.data);
+      
+            // Navegar a la pantalla de detalles con la información del libro
+            navigation.navigate('Detalles', { book: data.data });
+          } else {
+            console.error('Error:', data.error);
+            Alert.alert('Error', data.error);
+          }
         } catch (error) {
-          console.error('Error al enviar el título:', error);
-          Alert.alert('Error', 'No se pudo enviar el título al servidor.');
+          console.error('Error al obtener detalles del libro:', error);
+          Alert.alert('Error', 'No se pudo obtener los detalles del libro.');
         }
-    };
+      };
 
   const renderBookItem = ({ item }) => (
 
