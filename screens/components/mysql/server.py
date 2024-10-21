@@ -27,6 +27,21 @@ def getUser():
     except Exception as e:
         return jsonify({'error': str(e)}), 500  # Manejo de errores
 
+# Mostrar detalles del libro a traves de detailsBook (metodo POST)
+@app.route('/detailsBook/<string:titulo>', methods=['GET'])
+def get_book_details(titulo):
+    try:
+        book_details = db.get_detailsBooks(titulo)
+
+        if not book_details:
+            return jsonify({'success': False, 'error': 'Libro no encontrado.'}), 404
+
+        return jsonify({'success': True, 'data': book_details})
+
+    except Exception as e:
+        print(f'Error al obtener detalles del libro: {str(e)}')
+        return jsonify({'success': False, 'error': 'Error interno del servidor.', 'details': str(e)}), 500
+
 # ,---------------- POST -----------------,
 
 # Buscar

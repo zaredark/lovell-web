@@ -47,24 +47,9 @@ const Search = ({ navigation, route }) => {
   }, [searchTerm]);
 
   // Maneja la selección de un libro y solicita detalles con Axios
-  const handlePress = async (item) => {
-    try {
-      console.log('Enviando título:', item.titulo); // Verifica el título
-      const response = await axios.post('https://lovell-web.onrender.com/detailsBook', {
-        titulo: item.titulo, // Enviar título en el cuerpo del POST
-      });
-      
-      const data = response.data;
-      console.log('Respuesta del servidor:', data); // Verifica la respuesta
-      
-      if (data.success) {
-        navigation.navigate('Detalles', { data: data.data });
-      } else {
-        console.error('Error:', data.error);
-      }
-    } catch (error) {
-      console.error('Error al obtener detalles del libro:', error);
-    }
+  const handlePress = (item) => {
+    // Navega a la pantalla 'Detalles' y pasa el título del libro
+    navigation.navigate('Detalles', { titulo: item.titulo });
   };
 
   // Renderiza cada libro en la lista

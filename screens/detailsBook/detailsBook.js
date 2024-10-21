@@ -37,8 +37,15 @@ const DetailsBook = ({ navigation, route }) => {
 
   const fetchBookDetails = async () => {
     try {
-      const response = await axios.post('https://lovell-web.onrender.com/detailsBook', { titulo: route.params.titulo });
-      setBookDetails(response.data);
+      const response = await axios.post('https://lovell-web.onrender.com/detailsBook', {
+        titulo: route.params.titulo, // Usa el título recibido como parámetro
+      });
+      
+      if (response.data.success) {
+        setBookDetails(response.data.data); // Establece los detalles del libro
+      } else {
+        console.error("Error fetching book details:", response.data.error);
+      }
     } catch (error) {
       console.error("Error fetching book details:", error);
       // Manejar el error adecuadamente aquí, tal vez estableciendo un estado de error
