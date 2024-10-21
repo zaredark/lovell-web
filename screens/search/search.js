@@ -62,11 +62,9 @@ const Search = ({ navigation, route }) => {
             navigation.navigate('Detalles', { book: data.data });
           } else {
             console.error('Error:', data.error);
-            Alert.alert('Error', data.error);
           }
         } catch (error) {
           console.error('Error al obtener detalles del libro:', error);
-          Alert.alert('Error', 'No se pudo obtener los detalles del libro.');
         }
       };
 
