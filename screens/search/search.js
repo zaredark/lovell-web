@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { 
   View, 
   Text, 
@@ -43,21 +44,21 @@ const Search = ({ navigation, route }) => {
       }
     };
 
-    const handlePress = async ({ item }) => {
+    const handlePress = async (item) => {
         try {
-          // Aquí tomas el título del libro
-          const title = item.titulo;
-        
+          const { titulo } = item; // Obtener el título del libro
+  
           // Enviar el título al backend
-          const response = await axios.post('http://tu-api.com/buscar-libro', { titulo });
-          
-        
+          const response = await axios.post('https://tu-api.com/buscar-libro', { titulo });
+  
           // Manejar la respuesta del servidor
           console.log('Respuesta del servidor:', response.data);
-
-          navigation.navigate('Detalles', { book: item })
+  
+          // Navegar a la pantalla de detalles
+          navigation.navigate('Detalles', { book: item });
         } catch (error) {
           console.error('Error al enviar el título:', error);
+          Alert.alert('Error', 'No se pudo enviar el título al servidor.');
         }
     };
 
@@ -65,7 +66,7 @@ const Search = ({ navigation, route }) => {
 
     <TouchableOpacity 
       style={styles.standBooks} 
-      onPress={handlePress}
+      onPress={handlePress(item)}
     >
       <View style={{ flexDirection: 'row' }}>
         <Image 
