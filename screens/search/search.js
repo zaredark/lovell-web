@@ -49,11 +49,14 @@ const Search = ({ navigation, route }) => {
   // Maneja la selección de un libro y solicita detalles con Axios
   const handlePress = async (item) => {
     try {
+      console.log('Enviando título:', item.titulo); // Verifica el título
       const response = await axios.post('https://lovell-web.onrender.com/detailsBook', {
         titulo: item.titulo, // Enviar título en el cuerpo del POST
       });
-
+      
       const data = response.data;
+      console.log('Respuesta del servidor:', data); // Verifica la respuesta
+      
       if (data.success) {
         navigation.navigate('Detalles', { titulo: data.data });
       } else {
