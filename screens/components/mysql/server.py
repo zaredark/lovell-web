@@ -64,8 +64,8 @@ def details_book():
             return jsonify({'success': True, 'data': book_details})
 
         except Exception as e:
-            print(f'Error al obtener detalles del libro: {str(e)}')
-            return jsonify({'success': False, 'error': 'Error interno del servidor.'}), 500
+            print(f'Error al obtener detalles del libro: {str(e)}')  # Imprimir el error para depuración
+            return jsonify({'success': False, 'error': 'Error interno del servidor.', 'details': str(e)}), 500
 
 
 # ---------------------------------------------------------------------------------------------------
