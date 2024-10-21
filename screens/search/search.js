@@ -58,7 +58,7 @@ const Search = ({ navigation, route }) => {
       console.log('Respuesta del servidor:', data); // Verifica la respuesta
       
       if (data.success) {
-        navigation.navigate('Detalles', { titulo: data.data });
+        navigation.navigate('Detalles', { data: data.data });
       } else {
         console.error('Error:', data.error);
       }
