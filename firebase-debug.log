@@ -1,21 +1,21 @@
-[debug] [2024-10-21T05:08:49.919Z] ----------------------------------------------------------------------
-[debug] [2024-10-21T05:08:49.922Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\test\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
-[debug] [2024-10-21T05:08:49.922Z] CLI Version:   13.22.0
-[debug] [2024-10-21T05:08:49.922Z] Platform:      win32
-[debug] [2024-10-21T05:08:49.922Z] Node Version:  v20.12.2
-[debug] [2024-10-21T05:08:49.922Z] Time:          Mon Oct 21 2024 02:08:49 GMT-0300 (hora estándar de Argentina)
-[debug] [2024-10-21T05:08:49.923Z] ----------------------------------------------------------------------
+[debug] [2024-10-21T05:11:50.481Z] ----------------------------------------------------------------------
+[debug] [2024-10-21T05:11:50.483Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\test\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2024-10-21T05:11:50.483Z] CLI Version:   13.22.0
+[debug] [2024-10-21T05:11:50.483Z] Platform:      win32
+[debug] [2024-10-21T05:11:50.483Z] Node Version:  v20.12.2
+[debug] [2024-10-21T05:11:50.483Z] Time:          Mon Oct 21 2024 02:11:50 GMT-0300 (hora estándar de Argentina)
+[debug] [2024-10-21T05:11:50.484Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2024-10-21T05:08:49.990Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2024-10-21T05:08:49.990Z] > authorizing via signed-in user (zaredark.ciber@gmail.com)
-[debug] [2024-10-21T05:08:49.990Z] [iam] checking project lovell-app for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
-[debug] [2024-10-21T05:08:49.991Z] No OAuth tokens found
-[debug] [2024-10-21T05:08:49.992Z] No OAuth tokens found
-[debug] [2024-10-21T05:08:49.992Z] > refreshing access token with scopes: []
-[debug] [2024-10-21T05:08:49.994Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
-[debug] [2024-10-21T05:08:49.994Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2024-10-21T05:08:50.262Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
-[debug] [2024-10-21T05:08:50.262Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2024-10-21T05:08:50.265Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/lovell-app:testIamPermissions [none]
-[debug] [2024-10-21T05:08:50.265Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/lovell-app:testIamPermissions x-goog-quota-user=projects/lovell-app
-[debug] [2024-10-21T05:08:50.265Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/lovell-app:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2024-10-21T05:11:50.545Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-21T05:11:50.546Z] > authorizing via signed-in user (zaredark.ciber@gmail.com)
+[debug] [2024-10-21T05:11:50.546Z] [iam] checking project lovell-app for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2024-10-21T05:11:50.547Z] No OAuth tokens found
+[debug] [2024-10-21T05:11:50.547Z] No OAuth tokens found
+[debug] [2024-10-21T05:11:50.548Z] > refreshing access token with scopes: []
+[debug] [2024-10-21T05:11:50.549Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-21T05:11:50.549Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-21T05:11:50.800Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-10-21T05:11:50.801Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-21T05:11:50.804Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/lovell-app:testIamPermissions [none]
+[debug] [2024-10-21T05:11:50.804Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/lovell-app:testIamPermissions x-goog-quota-user=projects/lovell-app
+[debug] [2024-10-21T05:11:50.804Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/lovell-app:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
