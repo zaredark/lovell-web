@@ -21,10 +21,8 @@ const Search = ({ navigation, route }) => {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState(term);
 
-  // Ejecuta fetchResults cada vez que cambia el término de búsqueda
-  useEffect(() => {
-    if (searchTerm) fetchResults();
-  }, [searchTerm]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Consulta POST para buscar libros
   const fetchResults = async () => {
@@ -45,6 +43,19 @@ const Search = ({ navigation, route }) => {
       console.error('Error en la consulta:', error);
     }
   };
+
+  // Ejecuta fetchResults cada vez que cambia el término de búsqueda
+  useEffect(() => {
+    if (searchTerm) fetchResults();
+  }, [searchTerm]);
+
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />; // Muestra un indicador de carga
+  }
+
+  if (error) {
+    return <Text>{error}</Text>; // Muestra un mensaje de error
+  }
 
   // Maneja la selección de un libro y solicita detalles con Axios
   const handlePress = async (item) => {
