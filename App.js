@@ -26,7 +26,6 @@ import Notifications from "./screens/notifications/notifications";
 import DetailsBook from "./screens/detailsBook/detailsBook";
 import Regis from "./screens/regis/regis";
 import Search from "./screens/search/search";
-import NotFoundScreen from "./screens/errorReplace";
 
 import { DisableContent } from "./screens/components-for-screens/disableScreenContent/disableScreenContent";
 //
@@ -49,7 +48,6 @@ function Mystack() {
       <Stack.Screen name="Registro" component={Regis} options={{ headerShown: false, animationEnabled: false}}/>
       <Stack.Screen name="Leer" component={Read} options={{ headerShown: false, animationEnabled: false}}/>
       <Stack.Screen name="Buscar" component={Search} options={{ headerShown: false, animationEnabled: false}}/>
-      <Stack.Screen name="*" component={NotFoundScreen} options={{ headerShown: false, animationEnabled: false}}/>
     </Stack.Navigator>
   )
 }

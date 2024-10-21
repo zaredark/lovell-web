@@ -93,8 +93,9 @@ const DetailsBook = ({ navigation, route }) => {
           source={{ uri: bookDetails.portada }}
           style={{
             alignSelf: 'center',
-            width: 1300,
-            marginTop: '30%',
+            width: '100%',
+            height: '70%',
+            marginTop: '7%',
             transform: [
               {
                 translateY: scrollY.interpolate({
@@ -116,6 +117,7 @@ const DetailsBook = ({ navigation, route }) => {
             right: 0,
             top: 0,
             height: '45%',
+            marginTop: '18%',
             opacity: 0.997
           }}
         />
@@ -123,7 +125,13 @@ const DetailsBook = ({ navigation, route }) => {
         <Image style={[styles.addImageBook, { marginTop: -190, alignSelf: 'center' }]} source={{ uri: bookDetails.portada }} />
         <View style={{ flexDirection: 'column', alignItems: 'center' }}>
           <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>{bookDetails.titulo}</Text>
-          <Text style={styles.status}>{bookDetails.completo ? 'Completo' : 'En proceso'}</Text>
+          {bookDetails.completo ? 
+              <Text style={styles.status}>
+                Completo
+              </Text> : 
+              <Text style={[styles.status, {backgroundColor: '#8534e6',}]}>
+                En proceso
+              </Text>}
         </View>
         
         <TouchableOpacity style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 10 }} onPress={() => navigation.navigate('Perfil')}>
