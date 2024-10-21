@@ -101,7 +101,7 @@ class DataBaseLovellWeb:
             INNER JOIN
                 usuarios
             ON
-                libros.autor = autor.id_user
+                libros.autor = usuarios.id_user
             WHERE
                 libros.titulo = %s
         '''
