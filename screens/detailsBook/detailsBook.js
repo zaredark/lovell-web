@@ -94,7 +94,6 @@ const DetailsBook = ({ navigation, route }) => {
           style={{
             alignSelf: 'center',
             width: 1300,
-            marginTop: 30,
             transform: [
               {
                 translateY: scrollY.interpolate({
