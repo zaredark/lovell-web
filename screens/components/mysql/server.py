@@ -31,16 +31,16 @@ def getUser():
 def get_book_details():
     title = request.args.get('titulo')  # Título desde los parámetros de consulta
     if not title:
-        return jsonify({"success": False, "error": "No title provided"}), 400
+        return jsonify({"error": "No title provided"}), 400
 
     try:
         book_details = db.get_detailsBooks(title)
         if book_details:
-            return jsonify({"success": True, "data": book_details}), 200
+            return jsonify({"data": book_details}), 200
         else:
-            return jsonify({"success": False, "error": "Book not found"}), 404
+            return jsonify({"error": "Book not found"}), 404
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"error": str(e)}), 500
 # ,---------------- POST -----------------,
 
 @app.route('/search', methods=['POST'])
