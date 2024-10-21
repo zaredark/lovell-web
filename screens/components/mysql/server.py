@@ -29,6 +29,7 @@ def getUser():
 
 # ,---------------- POST -----------------,
 
+# Buscar
 @app.route('/search', methods=['POST'])
 def search_books():
     data = request.get_json()  # Obtenemos los datos de la solicitud POST
@@ -43,22 +44,31 @@ def search_books():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# Mostrar detalles
+@app.route('/detailsBook', methods=['POST'])
+def details_book():
+    if request.method == 'POST':
+        try:
+            data = request.json
+            titulo = data.get('titulo')
+
+            if not titulo:
+                return jsonify({'success': False, 'error': 'Título es requerido.'}), 400
+
+            # Aquí llamamos a get_detailsBooks para obtener la información
+            book_details = db.get_detailsBooks(titulo)
+
+            if not book_details:
+                return jsonify({'success': False, 'error': 'Libro no encontrado.'}), 404
+
+            return jsonify({'success': True, 'data': book_details})
+
+        except Exception as e:
+            print(f'Error al obtener detalles del libro: {str(e)}')
+            return jsonify({'success': False, 'error': 'Error interno del servidor.'}), 500
+
+
+# ---------------------------------------------------------------------------------------------------
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
-@app.route('/detailsBook', methods=['POST'])
-def get_book_details():
-    data = request.get_json()  # Obtener el título desde el cuerpo de la solicitud
-    title = data.get('titulo')  # Título desde el cuerpo de la solicitud
-    if not title:
-        return jsonify({"error": "No title provided"}), 400
-
-    try:
-        book_details = db.get_detailsBooks(title)
-        if book_details:
-            return jsonify({"data": book_details}), 200
-        else:
-            return jsonify({"error": "Book not found"}), 404
-    except Exception as e:
-        return jsonify({"error": 'Internal Server Error'}), 500
