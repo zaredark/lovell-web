@@ -47,25 +47,23 @@ def search_books():
 # Mostrar detalles
 @app.route('/detailsBook', methods=['POST'])
 def details_book():
-    if request.method == 'POST':
-        try:
-            data = request.json
-            titulo = data.get('titulo')
+    try:
+        data = request.json
+        print("Datos recibidos:", data)  # Agregar esta línea para debug
+        titulo = data.get('titulo')
 
-            if not titulo:
-                return jsonify({'success': False, 'error': 'Título es requerido.'}), 400
+        if not titulo:
+            return jsonify({'success': False, 'error': 'Título es requerido.'}), 400
 
-            # Aquí llamamos a get_detailsBooks para obtener la información
-            book_details = db.get_detailsBooks(titulo)
+        book_details = db.get_detailsBooks(titulo)
+        if not book_details:
+            return jsonify({'success': False, 'error': 'Libro no encontrado.'}), 404
 
-            if not book_details:
-                return jsonify({'success': False, 'error': 'Libro no encontrado.'}), 404
+        return jsonify({'success': True, 'data': book_details})
 
-            return jsonify({'success': True, 'data': book_details})
-
-        except Exception as e:
-            print(f'Error al obtener detalles del libro: {str(e)}')  # Imprimir el error para depuración
-            return jsonify({'success': False, 'error': 'Error interno del servidor.', 'details': str(e)}), 500
+    except Exception as e:
+        print(f'Error al obtener detalles del libro: {str(e)}')
+        return jsonify({'success': False, 'error': 'Error interno del servidor.', 'details': str(e)}), 500
 
 
 # ---------------------------------------------------------------------------------------------------
