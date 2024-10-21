@@ -27,20 +27,6 @@ def getUser():
     except Exception as e:
         return jsonify({'error': str(e)}), 500  # Manejo de errores
 
-@app.route('/detailsBook', methods=['GET'])
-def get_book_details():
-    title = request.args.get('titulo')  # Título desde los parámetros de consulta
-    if not title:
-        return jsonify({"error": "No title provided"}), 400
-
-    try:
-        book_details = db.get_detailsBooks(title)
-        if book_details:
-            return jsonify({"data": book_details}), 200
-        else:
-            return jsonify({"error": "Book not found"}), 404
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
 # ,---------------- POST -----------------,
 
 @app.route('/search', methods=['POST'])
@@ -60,3 +46,19 @@ def search_books():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
+@app.route('/detailsBook', methods=['POST'])
+def get_book_details():
+    data = request.get_json()  # Obtener el título desde el cuerpo de la solicitud
+    title = data.get('titulo')  # Título desde el cuerpo de la solicitud
+    if not title:
+        return jsonify({"error": "No title provided"}), 400
+
+    try:
+        book_details = db.get_detailsBooks(title)
+        if book_details:
+            return jsonify({"data": book_details}), 200
+        else:
+            return jsonify({"error": "Book not found"}), 404
+    except Exception as e:
+        return jsonify({"error": 'Internal Server Error'}), 500

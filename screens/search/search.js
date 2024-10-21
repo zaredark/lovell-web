@@ -15,65 +15,58 @@ import { styles } from '../components/styles/styles';
 import { useGoBackPreviousScreen } from '../components/goBack/goBack';
 
 const Search = ({ navigation, route }) => {
-    const { goBackPreviousScreen } = useGoBackPreviousScreen();
-    const { term } = route.params; // Recibe el término de búsqueda
+  const { goBackPreviousScreen } = useGoBackPreviousScreen();
+  const { term } = route.params || ''; // Recibe el término de búsqueda inicial
 
-    const [books, setBooks] = useState([]); // Estado para los resultados de búsqueda
-    const [searchTerm, setSearchTerm] = useState(term || ''); // Estado del término de búsqueda
+  const [books, setBooks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(term);
 
+  // Ejecuta fetchResults cada vez que cambia el término de búsqueda
+  useEffect(() => {
+    if (searchTerm) fetchResults();
+  }, [searchTerm]);
 
-    useEffect(() => {
-      fetchResults();
-    }, []);
+  // Consulta POST para buscar libros
+  const fetchResults = async () => {
+    try {
+      const response = await fetch('https://lovell-web.onrender.com/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ search: searchTerm }),
+      });
 
-    const fetchResults = async () => {
-      try {
-        const response = await fetch('https://lovell-web.onrender.com/search', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ search: searchTerm }),
-        });
-        const data = await response.json();
-        if (response.ok) {
-          setBooks(data); // Actualiza el estado con los libros encontrados
-        } else {
-          console.error('Error:', data.error);
-        }
-      } catch (error) {
-        console.error('Error:', error);
+      const data = await response.json();
+      if (response.ok) {
+        setBooks(data);
+      } else {
+        console.error('Error:', data.error);
       }
-    };
+    } catch (error) {
+      console.error('Error en la consulta:', error);
+    }
+  };
 
-    const handlePress = async (item) => {
-        try {
-          const { titulo } = item; // Extrae el título del libro
-      
-          // Realiza la solicitud GET con el título como parámetro de consulta
-          const response = await axios.get(`https://lovell-web.onrender.com/detailsBook`, {
-            params: { titulo },
-          });
-      
-          const data = response.data;
-          
-          if (data.success) {
-            console.log('Detalles del libro:', data.data);
-      
-            // Navegar a la pantalla de detalles con la información del libro
-            navigation.navigate('Detalles', { titulo: data.data });
-          } else {
-            console.error('Error:', data.error);
-          }
-        } catch (error) {
-          console.error('Error al obtener detalles del libro:', error);
-        }
-      };
+  // Maneja la selección de un libro y solicita detalles con Axios
+  const handlePress = async (item) => {
+    try {
+      const response = await axios.post('https://lovell-web.onrender.com/detailsBook', {
+        titulo: item.titulo, // Enviar título en el cuerpo del POST
+      });
 
+      const data = response.data;
+      if (data.success) {
+        navigation.navigate('Detalles', { titulo: data.data });
+      } else {
+        console.error('Error:', data.error);
+      }
+    } catch (error) {
+      console.error('Error al obtener detalles del libro:', error);
+    }
+  };
+
+  // Renderiza cada libro en la lista
   const renderBookItem = ({ item }) => (
-
-    <TouchableOpacity 
-      style={styles.standBooks} 
-      onPress={() => handlePress(item)}
-    >
+    <TouchableOpacity style={styles.standBooks} onPress={() => handlePress(item)}>
       <View style={{ flexDirection: 'row' }}>
         <Image 
           style={styles.bookPhoto} 
@@ -88,9 +81,14 @@ const Search = ({ navigation, route }) => {
               source={require('./../components/imgs/caps.png')} 
             />
             <Text style={{ marginHorizontal: 5 }}>{item.cant_capitulos} partes</Text>
-            <Text style={styles.status}>
-              {item.completo ? 'Completo' : 'En progreso'}
-            </Text>
+            {item.completo ? 
+              <Text style={styles.status}>
+                Completo
+              </Text> : 
+              <Text style={[styles.status, {backgroundColor: '#8534e6',}]}>
+                En proceso
+              </Text>}
+            
           </View>
           <Text style={{ marginTop: 5, width: '75%' }}>
             {item.sipnosis.substring(0, 100)}...
@@ -114,7 +112,7 @@ const Search = ({ navigation, route }) => {
           value={searchTerm}
           onChangeText={setSearchTerm}
           style={{ flex: 1, borderBottomWidth: 1, marginRight: 10 }}
-          onSubmitEditing={fetchResults} // Actualiza los resultados al presionar enter
+          onSubmitEditing={fetchResults} 
         />
       </View>
 
