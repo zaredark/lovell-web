@@ -141,7 +141,7 @@ const DetailsBook = ({ navigation, route }) => {
         </View>
 
         <View style={styles.form}>
-          <Text style={{ alignSelf: 'center', fontSize: 20, fontWeight: 'bold' }}>Sipnosis</Text>
+          <Text style={{ alignSelf: 'center', fontSize: 20, fontWeight: 'bold', minHeight: '50%' }}>Sipnosis</Text>
           <Text style={{ alignSelf: 'center', width: 1000, paddingLeft: 3, color: '#000', borderColor: '#000', borderWidth: 1 }} multiline editable={false}> 
             {bookDetails.sipnosis}
           </Text>
