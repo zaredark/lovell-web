@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-
 import { 
   View, 
   Text, 
@@ -14,20 +13,21 @@ import {
 } from 'react-native';
 
 import { useAuth, AuthProvider } from '../components/firebase/controllers/authContext';
-import { auth} from './../components/firebase/firebase'
+import { useGoBackPreviousScreen } from '../components/goBack/goBack';
+import { auth } from './../components/firebase/firebase'
 import { styles } from './../components/styles/styles';
 
-const Regis = ({ router }) => {
+const Regis = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { goBackPreviousScreen } = useGoBackPreviousScreen();
-
+    
     //const { login, loginWithGoogle } = useAuth();
 
     //const navigation = useNavigation();
 
     // Función para manejar el inicio de sesión
-    const handleRegis = () => {
+    const registry = () => {
         auth
         .createUserWithEmailAndPassword(email, password)
         .then(userCredentials => {
@@ -37,6 +37,7 @@ const Regis = ({ router }) => {
         })
         .catch(error => alert(error.message))
     }
+        
 
     // Función para manejar el inicio de sesión con Google
     // const handleGoogle = async () => {
@@ -55,7 +56,7 @@ const Regis = ({ router }) => {
             </TouchableOpacity>            
             <ScrollView
             >
-                <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 120}}>
+                <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 120, marginTop: "-5.2%"}}>
                     <View style={[{alignItems: 'center', padding: 3}, styles.styleForm]}>
                         <View>
                             <Text style={styles.titleApp}>Lovell</Text>
@@ -78,7 +79,7 @@ const Regis = ({ router }) => {
                             autoCapitalize="none"
                             style={styles.input}
                         />
-                        <TouchableOpacity style={styles.buttonLogin} onPress={handleRegis}>
+                        <TouchableOpacity style={styles.buttonLogin} onPress={() => registry}>
                             <Text style={ {fontSize: 14} }>Registrarse</Text>
                         </TouchableOpacity>
                         {/*<Text style={ {marginVertical: 18,} }>o</Text>

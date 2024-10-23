@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { 
   View, 
   Text, 
@@ -14,8 +14,9 @@ import {
 } from 'react-native';
 
 import { useAuth, AuthProvider } from './../components/firebase/controllers/authContext';
-import { auth} from './../components/firebase/firebase'
+import { auth} from './../components/firebase/firebase';
 import { styles } from './../components/styles/styles';
+import { DarkTheme } from '@react-navigation/native';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -26,9 +27,9 @@ const Login = ({ navigation }) => {
     //const navigation = useNavigation();
 
     // Función para manejar el inicio de sesión
-    const handleLogin = () => {
+    const handleLogin = (post_email, post_password) => {
         auth
-        .signInWithEmailAndPassword(email, password)
+        .signInWithEmailAndPassword(post_email, post_password)
         .then(userCredentials => {
             const user = userCredentials.user;
             console.log('Logged in with:', user.email);
@@ -46,6 +47,29 @@ const Login = ({ navigation }) => {
     //         console.log('Error al iniciar sesión', error.message);
     //     }
     // }
+
+    const obtenerDatos = async () => {
+        try {
+          const jsonDatos = await AsyncStorage.getItem('@datosUsuario');
+          if (jsonDatos !== null) {
+            const datos = JSON.parse(jsonDatos);
+            console.log('Datos obtenidos:', datos);
+          }
+        } catch (e) {
+          console.error('Error al obtener datos:', e);
+        }
+      };
+    
+    data = obtenerDatos()
+    console.log(data)
+    //useEffect(() => {
+    //    
+    //    //getData = obtenerDatos();
+    //    //console.log(getData.dataEmail, getData.dataPassword, getData.isSubmitted)
+    //    //if (getIsSubmitted === true) {
+    //    //    handleLogin(getData.dataEmail, getData.dataPassword)
+    //    //}
+    //}, [])
 
     return (
         <View style={styles.container}>
@@ -75,7 +99,7 @@ const Login = ({ navigation }) => {
                             autoCapitalize="none"
                             style={styles.input}
                         />
-                        <TouchableOpacity style={styles.buttonLogin} onPress={handleLogin}>
+                        <TouchableOpacity style={styles.buttonLogin} onPress={() => handleLogin(email, password)}>
                             <Text style={ {fontSize: 14} }>Iniciar Sesión</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonLogin} onPress={() => navigation.navigate('Registro')}>

@@ -47,7 +47,7 @@ const Main = ({navigation}) => {
     searchBooks()
     navigation.navigate('Buscar', { term: searchTerm })
   }
- 
+  
   return (      
     <View style={styles.container}>
       <View style={{borderBottomColor: "#dfdfdf", borderBottomWidth: 1, marginTop: '-2%'}}>

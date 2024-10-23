@@ -15,8 +15,9 @@ import {
 
 import { NavBar } from '../components/navbar/navbar';
 import { styles } from '../components/styles/styles';
+import { useGoBackPreviousScreen } from '../components/goBack/goBack';
 
-const Notifications = () => {
+const Notifications = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={{borderBottomColor: "#dfdfdf", borderBottomWidth: 1, marginTop: '-2%'}}>

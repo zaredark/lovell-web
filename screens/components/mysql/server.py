@@ -42,6 +42,18 @@ def get_book_details(titulo):
         print(f'Error al obtener detalles del libro: {str(e)}')
         return jsonify({'success': False, 'error': 'Error interno del servidor.', 'details': str(e)}), 500
 
+# Mostrar libro demostración en la Pantalla Principal
+@app.route('/getMainBook', methods=['GET'])
+def get_book():
+    try:
+        book = db.bookDemo()
+        if book:
+            return jsonify(book), 200
+        else:
+            jsonify({'error': 'Book not found'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500  # Manejo de errores
+    
 # ,---------------- POST -----------------,
 
 # Buscar

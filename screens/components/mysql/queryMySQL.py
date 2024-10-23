@@ -111,3 +111,22 @@ class DataBaseLovellWeb:
         result = self.cursor.fetchone()
         self.disconnect()
         return result
+
+    def bookDemon (self, value):
+        self.connect()
+        query = f'''
+            SELECT 
+                titulo,
+                sipnosis,
+                cant_capitulos,
+                maduro,
+                completo,
+                portada
+            FROM
+                libros
+            WHERE
+                titulo = "Maliss QUEEN RED RANSOM - Yu-G-i-Oh!"
+        '''
+        result = self.cursor.fetchall()
+        self.disconnect()
+        return result

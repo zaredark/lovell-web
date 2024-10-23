@@ -15,14 +15,25 @@ import {
 } from 'react-native';
 
 import { NavBar } from '../components/navbar/navbar';
+import { useNavigationAvoid } from '../components/avoid404/navigationAvoid';
 import { styles } from '../components/styles/styles';
 import { BarSelection, ElementsLibrary } from '../components/barSelection/ElementsLibrary';
 import { useGoBackPreviousScreen } from '../components/goBack/goBack';
 
-const Library = () => {
+const Library = ({ navigation }) => {
+  const { 
+    redictLibrary, 
+    redictNotifications, 
+    redictProfile, 
+    redictCreate 
+  } = useNavigationAvoid();
+
+
   // Estado y funciones para la interaccion de la barra de la opcion seleccionada
   const [selectedOption, setSelectedOption] = useState('guardados');  // Estado para la opción seleccionada
   const [selectedDirection, setSelectedDirection] = useState('guardados'); // Estado para la dirección seleccionada
+
+  const { goBackPreviousScreen } = useGoBackPreviousScreen()
 
   const handleSlideBarSelection = (direction) => {
     setSelectedDirection(direction); // Actualiza la dirección seleccionada
@@ -40,18 +51,18 @@ const Library = () => {
   return(
       <View style={styles.container}>
         <View style={{borderBottomColor: "#dfdfdf", borderBottomWidth: 1, marginTop: '-2%'}}>
-          <TouchableOpacity onPress={() => navigation.navigate('Pantalla Principal')}>
+          <TouchableOpacity onPress={goBackPreviousScreen}>
             <Image style={styles.logo} source={ require('./../components/imgs/imgs-examples/lovell-logo-ver2.png')}/>
           </TouchableOpacity>
           <TouchableOpacity style={styles.searchBar}>
             <Text>🔎 Buscar historias, usuarios</Text>
           </TouchableOpacity>
           <View style={{flexDirection: 'row', marginTop: '-5%', marginLeft: '80%', marginVertical: 30}}>
-            <TouchableOpacity style={{marginLeft: '5%'}} onPress={() => navigation.navigate('Crear Historia')}>
+            <TouchableOpacity style={{marginLeft: '5%'}} onPress={() => navigation.navigate("Crea una historia")}>
               <Text style={{fontSize: 23, textAlign: 'center', backgroundColor: '#41f0b5', width: 80, borderRadius: 5}}>Crear</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{marginLeft: '5%', marginTop: '-0.7%'}} onPress={() => navigation.navigate('Biblioteca')}>
+            <TouchableOpacity style={{marginLeft: '5%', marginTop: '-0.7%'}} onPress={() => navigation.navigate("Biblioteca")}>
               <Image
                 source={ require('./../components/imgs/nav-bar-icons/library.png')} 
                 style={{
