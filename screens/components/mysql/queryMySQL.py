@@ -125,7 +125,7 @@ class DataBaseLovellWeb:
             FROM
                 libros
             WHERE
-                titulo = "Maliss QUEEN RED RANSOM - Yu-G-i-Oh!"
+                titulo = "Maliss QUEEN RED RANSOM - Yu-Gi-Oh!"
         '''
         result = self.cursor.fetchall()
         self.disconnect()
