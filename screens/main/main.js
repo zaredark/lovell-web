@@ -22,6 +22,8 @@ const Main = ({navigation}) => {
 
   const [searchTerm, setSearchTerm] = useState('');
 
+  const [bookDemo, setBookDemo] = useState(null);
+
   const searchBooks = async () => {
     try {
       const response = await fetch('https://lovell-web.onrender.com/search', {
@@ -47,7 +49,29 @@ const Main = ({navigation}) => {
     searchBooks()
     navigation.navigate('Buscar', { term: searchTerm })
   }
+
+  useEffect(() => {
+    const fetchBookDemo = async () => {
+      try {
+        const response = await axios.get('https://lovell-web.onrender.com/getMainBook');
+        if (response.status === 200) {
+          setBookDemo(response.data);
+        } else {
+          console.error('Error fetching book:', response.data.error);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchBookDemo();
+  }, [])
   
+  const handlePress = (item) => {
+    // Navega a la pantalla 'Detalles' y pasa el título del libro
+    navigation.navigate('Detalles', { titulo: item.titulo });
+  };
+
   return (      
     <View style={styles.container}>
       <View style={{borderBottomColor: "#dfdfdf", borderBottomWidth: 1, marginTop: '-2%'}}>
@@ -128,35 +152,34 @@ const Main = ({navigation}) => {
               </View>
             </ScrollView>
           </View>
-
+          
           <View style={styles.standBooks}>
             <Text style={styles.category}>Historias Premium</Text>
-            <ScrollView 
-              horizontal={true}
-              showsHorizontalScrollIndicator={false} 
-              style={{flexDirection: 'row'}}
-            >
-              <TouchableOpacity onPress={() => navigation.navigate('Detalles')}>
-                <Image style={styles.bookPhoto} source={ require('../components/imgs/imgs-examples/banner.jpg') } />
-              </TouchableOpacity>
-              <Image style={styles.bookPhoto} source={ require('../components/imgs/bnha.png') } />
-              <Image style={styles.bookPhoto} source={ require('../components/imgs/fnaf.png') } />
-              <Image style={styles.bookPhoto} source={ require('../components/imgs/unicorniovolador.png') } />
-            </ScrollView>
+            {bookDemo && (
+              <><ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                style={{ flexDirection: 'row' }}
+              >
+                <TouchableOpacity onPress={() => handlePress(bookDemo.titulo)}>
+                  <Image style={styles.bookPhoto} source={{ uri: bookDemo.portada}} />
+                </TouchableOpacity>
+                <Image style={styles.bookPhoto} source={require('../components/imgs/bnha.png')} />
+                <Image style={styles.bookPhoto} source={require('../components/imgs/fnaf.png')} />
+                <Image style={styles.bookPhoto} source={require('../components/imgs/unicorniovolador.png')} />
+              </ScrollView><View>
+                  <Text style={styles.titleBook}>{bookDemo.titulo}</Text>
+                  <View style={{ flexDirection: 'row' }}>
+                    <Image style={styles.iconCaps} source={require('../components/imgs/caps.png')} />
+                    <Text style={{ marginHorizontal: 1 }}>{bookDemo.cant_capitulos} partes</Text>
+                    <Text style={styles.status}>{bookDemo.completo ? 'Completo' : 'En progreso'}</Text>
+                  </View>
 
-            <View>
-                <Text style={styles.titleBook}>Titulo 1 - Titulo de Prueba</Text>
-                <View style={{flexDirection: 'row'}}>
-                  <Image style={styles.iconCaps} source={ require('../components/imgs/caps.png') } />
-                  <Text style={{marginHorizontal: 1}}>11 partes</Text>
-                  <Text style={styles.status}>Completo</Text>
-                </View>
-
-                <Text style={{marginHorizontal: 10}}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
-                  aliqua. Ut enim ad minim veniam, qui
-                </Text>
-            </View>
+                  <Text style={{ marginHorizontal: 10 }}>
+                    {bookDemo.sipnosis}
+                  </Text>
+                </View></>
+            )}
 
           </View>
 
