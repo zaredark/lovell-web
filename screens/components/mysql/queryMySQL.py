@@ -129,6 +129,6 @@ class DataBaseLovellWeb:
         '''
         self.cursor.execute(query)
 
-        result = self.cursor.fetchall()
+        result = self.cursor.fetchone()
         self.disconnect()
         return result
