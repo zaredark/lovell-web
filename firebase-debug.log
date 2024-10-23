@@ -1,0 +1,53 @@
+[debug] [2024-10-23T18:35:47.621Z] ----------------------------------------------------------------------
+[debug] [2024-10-23T18:35:47.625Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\test\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2024-10-23T18:35:47.626Z] CLI Version:   13.22.0
+[debug] [2024-10-23T18:35:47.626Z] Platform:      win32
+[debug] [2024-10-23T18:35:47.626Z] Node Version:  v20.12.2
+[debug] [2024-10-23T18:35:47.626Z] Time:          Wed Oct 23 2024 15:35:47 GMT-0300 (hora estándar de Argentina)
+[debug] [2024-10-23T18:35:47.626Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-10-23T18:35:47.630Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2024-10-23T18:35:47.729Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-23T18:35:47.729Z] > authorizing via signed-in user (zaredark.ciber@gmail.com)
+[debug] [2024-10-23T18:35:47.729Z] [iam] checking project lovell-app for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2024-10-23T18:35:47.730Z] No OAuth tokens found
+[debug] [2024-10-23T18:35:47.730Z] No OAuth tokens found
+[debug] [2024-10-23T18:35:47.730Z] > refreshing access token with scopes: []
+[debug] [2024-10-23T18:35:47.731Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-10-23T18:35:47.731Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-23T18:35:48.071Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-10-23T18:35:48.071Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-10-23T18:35:48.075Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/lovell-app:testIamPermissions [none]
+[debug] [2024-10-23T18:35:48.075Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/lovell-app:testIamPermissions x-goog-quota-user=projects/lovell-app
+[debug] [2024-10-23T18:35:48.075Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/lovell-app:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2024-10-23T18:35:48.142Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2024-10-23T18:35:48.143Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2024-10-23T18:35:48.999Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/lovell-app:testIamPermissions 200
+[debug] [2024-10-23T18:35:49.000Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/lovell-app:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]}
+[debug] [2024-10-23T18:35:49.001Z] Checked if tokens are valid: true, expires at: 1729712147071
+[debug] [2024-10-23T18:35:49.001Z] Checked if tokens are valid: true, expires at: 1729712147071
+[debug] [2024-10-23T18:35:49.002Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/lovell-app [none]
+[debug] [2024-10-23T18:35:49.440Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/lovell-app 200
+[debug] [2024-10-23T18:35:49.441Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/lovell-app {"projectId":"lovell-app","projectNumber":"1090970075705","displayName":"lovell-app","name":"projects/lovell-app","resources":{"hostingSite":"lovell-app","realtimeDatabaseInstance":"lovell-app-default-rtdb","storageBucket":"lovell-app.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_5793118d-40a7-4963-8fa3-6c146642129d"}
+[info] 
+[info] === Deploying to 'lovell-app'...
+[info] 
+[info] i  deploying storage, firestore, hosting 
+[info] i  storage: ensuring required API firebasestorage.googleapis.com is enabled... 
+[debug] [2024-10-23T18:35:49.450Z] Checked if tokens are valid: true, expires at: 1729712147071
+[debug] [2024-10-23T18:35:49.450Z] Checked if tokens are valid: true, expires at: 1729712147071
+[debug] [2024-10-23T18:35:49.451Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/lovell-app/services/firebasestorage.googleapis.com [none]
+[debug] [2024-10-23T18:35:49.451Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/lovell-app/services/firebasestorage.googleapis.com x-goog-quota-user=projects/lovell-app
+[debug] [2024-10-23T18:35:50.614Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/lovell-app/services/firebasestorage.googleapis.com 200
+[debug] [2024-10-23T18:35:50.614Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/lovell-app/services/firebasestorage.googleapis.com [omitted]
+[info] +  storage: required API firebasestorage.googleapis.com is enabled 
+[debug] [2024-10-23T18:35:50.615Z] Checked if tokens are valid: true, expires at: 1729712147071
+[debug] [2024-10-23T18:35:50.616Z] Checked if tokens are valid: true, expires at: 1729712147071
+[debug] [2024-10-23T18:35:50.616Z] >>> [apiv2][query] GET https://firebasestorage.googleapis.com/v1alpha/projects/lovell-app/defaultBucket [none]
+[debug] [2024-10-23T18:35:51.697Z] <<< [apiv2][status] GET https://firebasestorage.googleapis.com/v1alpha/projects/lovell-app/defaultBucket 200
+[debug] [2024-10-23T18:35:51.697Z] <<< [apiv2][body] GET https://firebasestorage.googleapis.com/v1alpha/projects/lovell-app/defaultBucket {"name":"projects/lovell-app/defaultBucket","location":"US","bucket":{"name":"projects/lovell-app/buckets/lovell-app.appspot.com"}}
+[info] i  firebase.storage: checking storage.rules for compilation errors... 
+[debug] [2024-10-23T18:35:51.698Z] Checked if tokens are valid: true, expires at: 1729712147071
+[debug] [2024-10-23T18:35:51.698Z] Checked if tokens are valid: true, expires at: 1729712147071
+[debug] [2024-10-23T18:35:51.698Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/lovell-app:test [none]
+[debug] [2024-10-23T18:35:51.698Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/lovell-app:test [omitted]

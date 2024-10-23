@@ -155,31 +155,34 @@ const Main = ({navigation}) => {
           
           <View style={styles.standBooks}>
             <Text style={styles.category}>Historias Premium</Text>
-            {bookDemo && (
-              <><ScrollView
+              <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 style={{ flexDirection: 'row' }}
               >
-                <TouchableOpacity onPress={() => handlePress(bookDemo.titulo)}>
-                  <Image style={styles.bookPhoto} source={{ uri: bookDemo.portada}} />
-                </TouchableOpacity>
+                {bookDemo && (
+                  <TouchableOpacity onPress={() => handlePress(bookDemo.titulo)}>
+                    <Image style={styles.bookPhoto} source={{ uri: bookDemo.portada}} />
+                  </TouchableOpacity>
+                )}
                 <Image style={styles.bookPhoto} source={require('../components/imgs/bnha.png')} />
                 <Image style={styles.bookPhoto} source={require('../components/imgs/fnaf.png')} />
                 <Image style={styles.bookPhoto} source={require('../components/imgs/unicorniovolador.png')} />
-              </ScrollView><View>
-                  <Text style={styles.titleBook}>{bookDemo.titulo}</Text>
+              </ScrollView>
+              <View>
+                {bookDemo && (
+                  <><Text style={styles.titleBook}>{bookDemo.titulo}</Text>
                   <View style={{ flexDirection: 'row' }}>
                     <Image style={styles.iconCaps} source={require('../components/imgs/caps.png')} />
                     <Text style={{ marginHorizontal: 1 }}>{bookDemo.cant_capitulos} partes</Text>
                     <Text style={styles.status}>{bookDemo.completo ? 'Completo' : 'En progreso'}</Text>
                   </View>
-
                   <Text style={{ marginHorizontal: 10 }}>
                     {bookDemo.sipnosis}
-                  </Text>
-                </View></>
-            )}
+                  </Text></>
+                )}
+              </View>
+            
 
           </View>
 
