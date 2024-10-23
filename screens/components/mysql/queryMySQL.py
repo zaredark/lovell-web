@@ -112,7 +112,7 @@ class DataBaseLovellWeb:
         self.disconnect()
         return result
 
-    def bookDemo (self, value):
+    def bookDemo (self):
         self.connect()
         query = f'''
             SELECT 

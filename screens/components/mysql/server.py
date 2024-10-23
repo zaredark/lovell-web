@@ -44,7 +44,7 @@ def get_book_details(titulo):
 
 # Mostrar libro demostración en la Pantalla Principal
 @app.route('/getMainBook', methods=['GET'])
-def get_book():
+def get_book_demo():
     try:
         book = db.bookDemo()
         if book:
