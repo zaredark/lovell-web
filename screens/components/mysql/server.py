@@ -48,20 +48,11 @@ def get_book_demo():
     try:
         book = db.bookDemo()
         if book:
-            # Convertir la tupla en diccionario para enviar como JSON
-            book_data = {
-                'titulo': book[0][0],
-                'sipnosis': book[0][1],
-                'cant_capitulos': book[0][2],
-                'maduro': book[0][3],
-                'completo': book[0][4],
-                'portada': book[0][5]
-            }
-            return jsonify(book_data), 200
+            return jsonify(book), 200
         else:
-            return jsonify({'error': 'Book not found'}), 404
+            jsonify({'error': 'Book not found'}), 404
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': str(e)}), 500  # Manejo de errores
     
 # ,---------------- POST -----------------,
 
