@@ -127,6 +127,8 @@ class DataBaseLovellWeb:
             WHERE
                 titulo = "Maliss QUEEN RED RANSOM - Yu-Gi-Oh!"
         '''
+        self.cursor.execute(query)
+
         result = self.cursor.fetchall()
         self.disconnect()
         return result
