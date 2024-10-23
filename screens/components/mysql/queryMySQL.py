@@ -125,7 +125,7 @@ class DataBaseLovellWeb:
             FROM
                 libros
             WHERE
-                titulo LIKE "Maliss QUEEN RED RANSOM - Yu-Gi-Oh!" LIMIT 1
+                titulo LIKE 'Maliss QUEEN RED RANSOM - Yu-Gi-Oh!' LIMIT 1
         '''
         self.cursor.execute(query)
 
