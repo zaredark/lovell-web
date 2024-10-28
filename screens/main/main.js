@@ -153,7 +153,7 @@ const Main = ({navigation}) => {
             </ScrollView>
           </View>
           
-          <View style={styles.standBooks}>
+          <View style={[styles.standBooks, {marginLeft: '-25%'}]}>
             <Text style={styles.category}>Historias Premium</Text>
               <ScrollView
                 horizontal={true}
@@ -161,7 +161,7 @@ const Main = ({navigation}) => {
                 style={{ flexDirection: 'row' }}
               >
                 {bookDemo && (
-                  <TouchableOpacity onPress={() => handlePress(bookDemo.titulo)}>
+                  <TouchableOpacity onPress={() => handlePress(bookDemo)}>
                     <Image style={styles.bookPhoto} source={{ uri: bookDemo.portada}} />
                   </TouchableOpacity>
                 )}
