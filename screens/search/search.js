@@ -13,44 +13,30 @@ import {
 
 import { styles } from '../components/styles/styles';
 import { useGoBackPreviousScreen } from '../components/goBack/goBack';
+import { db } from '../components/firebase/firebase';
 
-const Search = ({ navigation, route }) => {
-  const { goBackPreviousScreen } = useGoBackPreviousScreen();
-  const { term } = route.params || ''; // Recibe el término de búsqueda inicial
-
-  const [books, setBooks] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(term);
-
-  // Consulta POST para buscar libros
-  const fetchResults = async () => {
-    try {
-      const response = await fetch('https://lovell-web.onrender.com/search', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ search: searchTerm }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setBooks(data);
-      } else {
-        console.error('Error:', data.error);
+const Search = ({ navigation}) => {
+  
+    const { goBackPreviousScreen } = useGoBackPreviousScreen();
+    const [titulo, setTitulo] = useState('');
+    const [resultados, setResultados] = useState([]);
+  
+    const buscarLibros = async () => {
+      try {
+        const librosRef = db.collection('libros'); 
+        const snapshot = await librosRef.where('titulo', '<=', titulo).where('titulo', '<=', titulo + '\uf8ff').get();
+    
+        const resultados = [];
+        snapshot.forEach((doc) => {
+          resultados.push({ id: doc.id, ...doc.data() });
+        });
+    
+        setResultados(resultados);
+      } catch (error) {
+        console.error('Error buscando libros:', error);
       }
-    } catch (error) {
-      console.error('Error en la consulta:', error);
-    }
-  };
+    };
 
-  // Ejecuta fetchResults cada vez que cambia el término de búsqueda
-  useEffect(() => {
-    if (searchTerm) fetchResults();
-  }, [searchTerm]);
-
-  // Maneja la selección de un libro y solicita detalles con Axios
-  const handlePress = (item) => {
-    // Navega a la pantalla 'Detalles' y pasa el título del libro
-    navigation.navigate('Detalles', { titulo: item.titulo });
-  };
 
   // Renderiza cada libro en la lista
   const renderBookItem = ({ item }) => (
@@ -58,7 +44,7 @@ const Search = ({ navigation, route }) => {
       <View style={{ flexDirection: 'row' }}>
         <Image 
           style={styles.bookPhoto} 
-          source={{ uri: item.portada }} 
+          source={{ uri: item.portada }} // Se asume que 'portada' contiene la URL de la imagen
           resizeMode="cover" 
         />
         <View style={{ flexDirection: 'column', marginLeft: 10 }}>
@@ -73,13 +59,12 @@ const Search = ({ navigation, route }) => {
               <Text style={styles.status}>
                 Completo
               </Text> : 
-              <Text style={[styles.status, {backgroundColor: '#8534e6',}]}>
+              <Text style={[styles.status, { backgroundColor: '#8534e6' }]}>
                 En proceso
               </Text>}
-            
           </View>
           <Text style={{ marginTop: 5, width: '75%' }}>
-            {item.sipnosis.substring(0, 100)}...
+            {item.sipnosis?.substring(0, 100) || 'Sin sinopsis disponible'}...
           </Text>
         </View>
       </View>
@@ -96,22 +81,25 @@ const Search = ({ navigation, route }) => {
           />
         </TouchableOpacity>
         <TextInput
-          placeholder='🔎 Buscar historias, usuarios'
-          value={searchTerm}
-          onChangeText={setSearchTerm}
+          placeholder='🔎 Buscar libros por título'
+          value={titulo} // Cambiado a "titulo" para la búsqueda específica
+          onChangeText={setTitulo}
           style={{ flex: 1, borderBottomWidth: 1, marginRight: 10 }}
-          onSubmitEditing={fetchResults} 
+          onSubmitEditing={buscarLibros} // Llama a la función de búsqueda
         />
       </View>
-
+  
       <Text style={[styles.category, { marginTop: 10 }]}>Resultados</Text>
-
-      <FlatList 
-        data={books}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={renderBookItem}
-        contentContainerStyle={{ paddingBottom: 16 }}
-      />
+  
+      {resultados.length > 0 ? (
+        <FlatList 
+          data={resultados}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={renderBookItem}
+        />
+      ) : (
+        <Text style={styles.noResults}>No se encontraron libros con ese título.</Text>
+      )}
     </View>
   );
 };
